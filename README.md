@@ -1,5 +1,5 @@
 # HandyNet
-더 Handy해진 ByteNet의 포크
+더 Handy해진 [ByteNet](https://github.com/ffrostfall/ByteNet)의 포크
 
 ## 특징
 - ByteNet의 포크이며 대부분의 구현을 공유합니다.
