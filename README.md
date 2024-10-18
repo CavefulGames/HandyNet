@@ -1,31 +1,69 @@
-<div align="center">
-  
-  <img align="center" src="./docs/assets/bytenetLogo.png" width=100 height=100></img>
+# HandyNet
+더 Handy해진 ByteNet의 포크
 
-# ByteNet
+## 특징
+- ByteNet의 포크이며 대부분의 구현을 공유합니다.
+- 코드 설계 및 아이디어는 `kitty-utils/net`에서 파생되었습니다.
 
-## Simple, buffer-based networking.
+## ByteNet과 차이점
+- HandyNet은 속도보다 메모리 사용량에 더 초점을 맞췄기 때문에 이론적으로 ByteNet이 더 빠를 수 있습니다. (ByteNet은 더 빠른 속도를 위해 페킷마다 메소드 함수를 생성하지만 HandyNet은 메타테이블을 활용하여 함수를 재활용합니다.)
+- `ByteNet.string` 자료형의 크기를 설정할 수 있습니다.
+- `definePacket`의 인수 `reliablityType` 속성이 `defineReliablePacket`과 `defineUnreliablePacket` 두가지 함수로 나뉨에 따라 테이블 `props` 인수를 받지 않고 기존에 `value` 속성이었던 값 자료형만 단일 인수로 받습니다. (간소화)
+- 몇가지 자료형 이름이 명확해졌습니다. (ex. `ByteNet.vec3` -> `HandyNet.Vector3`)
+- `Namespace` 타입에 `server`와 `client` 속성이 추가됨으로써 서버/클라이언트 구분을 더 명확히한 타입체킹이 가능합니다.
+- 서버/클라이언트의 예측 및 동기화 모델, 어드민 커맨드를 만들 때 유용하게 사용될 수 있는 `SharedCommand`와 `ServerCommand`가 추가되었습니다.
+- 이벤트 신호는 `LimeSignal`을 사용하여 받습니다. (결과적으로 Connection을 disconnect하기 더 간편해졌으며, 더 이상 `definePacket`에서 이벤트 신호 방식을 설정하지 않아도됩니다.)
+- HandyNet은 타입스크립트 타입을 지원하지 않습니다.
 
-[GitHub](https://github.com/ffrostfall/ByteNet) | [Documentation](https://ffrostfall.github.io/ByteNet/)
+## 사용 예제
+```lua
+-- packets.luau
 
-</div>
+return HandyNet.defineNamespace("example", function()
+	return {
+		hello = HandyNet.defineReliablePacket(
+			HandyNet.struct({
+				message = HandyNet.string(HandyNet.u8), -- Customizable string size (defaults to u16)
+				cf = HandyNet.CFrame
+			})
+		),
+		command = HandyNet.defineSharedCommand(function()
+			print("You ran the function in the server and the client!")
+		end),
+		serverCommand = HandyNet.defineServerCommand(function()
+			print("This function has been invoked from the server")
+		end)
+  	}
+end)
+```
 
-ByteNet is an networking library which takes your Luau data, and serializes it into buffers. On the other end, ByteNet deserializes your data, and then feeds it back to your Luau code. You don't need to worry about type validation, optimization, packet structure, etc. ByteNet does all the hard parts for you! Strictly typed with an incredibly basic API that explains itself, ByteNet makes networking simple, easy, and quick. There's very few concepts you need to grasp in order to use ByteNet; it has an incredibly minimalistic & simplistic, yet powerful API.
+```lua
+-- client.luau
 
-## Installation
+packets.hello:sendToServer({
+	message = "hi ya",
+	cf = CFrame.new()
+})
 
-You can install ByteNet on Wally, or through the latest release's `.rbxm` file.
+packets.hello.onReceived:connect(function()
+	print("received hello from server")
+end)
 
-## Performance
+packets.command()
+```
 
-ByteNet performs incredibly well compared to non-buffer based libraries like BridgeNet2. This is because ByteNet has a **custom serializer** that takes your Luau data and transforms it into a buffer, sending that and deserializing it on the other side.
+```lua
+-- server.luau
 
-## Further contact
+packets.hello:sendTo(player, {
+	message = "hi ya",
+	cf = CFrame.new()
+})
 
-You can contact me directly under the ByteNet thread in the [Roblox OSS Server](https://discord.gg/5KjV64PA3d).
+packets.hello.onReceived:connect(function()
+	print("received hello from client")
+end)
 
-Further documentation [here](https://ffrostfall.github.io/ByteNet/).
-
-## License
-
-This project is under the MIT license! so, it's open source
+packets.command()
+packets.serverCommand()
+```
