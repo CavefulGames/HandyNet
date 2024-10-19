@@ -9,16 +9,6 @@ export type namespaceData = {
 	},
 }
 
--- Externally used for defining packets
-export type packetProps<T> = {
-	value: T,
-	reliabilityType: ("reliable" | "unreliable")?,
-	callbackBehavior: {
-		spawnThread: boolean,
-		allowMultiple: boolean,
-	}?,
-}
-
 -- Used internally for
 export type channelData = {
 	cursor: number,
@@ -48,7 +38,7 @@ type Packet<T> = {
 
 -- Library type
 export type ByteNet = {
-	definePacket: <T>(props: packetProps<T>) -> Packet<T>,
+	definePacket: <T>(value: T) -> Packet<T>,
 	defineNamespace: <T>(name: string, namespace: () -> T) -> T,
 
 	struct: <T>(format: T) -> T,
