@@ -14,12 +14,12 @@ local values = {}
 function values.start()
 	if runContext == "server" then
 		local storage = Instance.new("Folder")
-		storage.Name = "BytenetStorage"
+		storage.Name = "HandynetStorage"
 		storage.Parent = ReplicatedStorage
 
 		valueFolder = storage
 	elseif runContext == "client" then
-		valueFolder = ReplicatedStorage:WaitForChild("BytenetStorage")
+		valueFolder = ReplicatedStorage:WaitForChild("HandynetStorage") :: Folder
 	end
 end
 

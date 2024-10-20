@@ -23,7 +23,8 @@ local unknown = require(script.dataTypes.unknown)
 local vec2 = require(script.dataTypes.vec2)
 local vec3 = require(script.dataTypes.vec3)
 local namespace = require(script.namespaces.namespace)
-local definePacket = require(script.packets.definePacket)
+local defineReliablePacket = require(script.packets.defineReliablePacket)
+local defineUnreliablePacket = require(script.packets.defineUnreliablePacket)
 local serverProcess = require(script.process.server)
 local values = require(script.replicated.values)
 local types = require(script.types)
@@ -38,29 +39,30 @@ end
 
 return (
 	table.freeze({
-		definePacket = definePacket,
+		defineReliablePacket = defineReliablePacket,
+		defineUnreliablePacket = defineUnreliablePacket,
 		defineNamespace = namespace,
 
 		array = array,
-		bool = bool(),
+		boolean = bool(),
 		optional = optional,
-		uint8 = uint8(),
-		uint16 = uint16(),
-		uint32 = uint32(),
-		int8 = int8(),
-		int16 = int16(),
-		int32 = int32(),
-		float32 = float32(),
-		float64 = float64(),
-		cframe = cframe(),
+		u8 = uint8(),
+		u16 = uint16(),
+		u32 = uint32(),
+		i8 = int8(),
+		i16 = int16(),
+		i32 = int32(),
+		f32 = float32(),
+		f64 = float64(),
+		Cframe = cframe(),
 		string = string(),
-		vec2 = vec2(),
-		vec3 = vec3(),
-		buff = buff(),
+		Vector2 = vec2(),
+		Vector3 = vec3(),
+		buffer = buff(),
 		struct = struct,
 		map = map,
-		inst = inst(),
+		Instance = inst(),
 		unknown = unknown(),
 		nothing = nothing(),
 	}) :: any
-) :: types.ByteNet
+) :: types.HandyNet

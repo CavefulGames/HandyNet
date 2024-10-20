@@ -1,49 +1,49 @@
 --!optimize 2
 --!native
+
+local RunService = game:GetService("RunService")
+
 local packetIDs = require(script.Parent.Parent.namespaces.packetIDs)
 local readRefs = require(script.Parent.readRefs)
+local emitter = require(script.Parent.Parent.emitter)
 
 local ref = packetIDs.ref()
-local freeThread: thread?
+local runContext: "server" | "client" = if RunService:IsServer() then "server" else "client"
 
-local function functionPasser(fn, ...)
-	local aquiredThread = freeThread
-	freeThread = nil
-	fn(...)
-	freeThread = aquiredThread
-end
+if runContext == "server" then
+	return function(incomingBuffer: buffer, references: { [number]: unknown }?, player: Player?)
+		local length = buffer.len(incomingBuffer)
+		local readCursor = 0
 
-local function yielder()
-	while true do
-		functionPasser(coroutine.yield())
+		readRefs.set(references)
+
+		while readCursor < length do
+			local packet = ref[buffer.readu8(incomingBuffer, readCursor)]
+			readCursor += 1
+
+			local value, valueLength = packet.reader(incomingBuffer, readCursor)
+
+			readCursor += valueLength
+
+			emitter(packet.onServerReceived, value, player)
+		end
 	end
-end
+elseif runContext == "client" then
+	return function(incomingBuffer: buffer, references: { [number]: unknown }?, player: Player?)
+		local length = buffer.len(incomingBuffer)
+		local readCursor = 0
 
-local function runListener(fn, ...)
-	if freeThread == nil then
-		freeThread = coroutine.create(yielder)
-		coroutine.resume(freeThread :: thread)
-	end
+		readRefs.set(references)
 
-	task.spawn(freeThread :: thread, fn, ...)
-end
+		while readCursor < length do
+			local packet = ref[buffer.readu8(incomingBuffer, readCursor)]
+			readCursor += 1
 
-return function(incomingBuffer: buffer, references: { [number]: unknown }?, player: Player?)
-	local length = buffer.len(incomingBuffer)
-	local readCursor = 0
+			local value, valueLength = packet.reader(incomingBuffer, readCursor)
 
-	readRefs.set(references)
+			readCursor += valueLength
 
-	while readCursor < length do
-		local packet = ref[buffer.readu8(incomingBuffer, readCursor)]
-		readCursor += 1
-
-		local value, valueLength = packet.reader(incomingBuffer, readCursor)
-
-		readCursor += valueLength
-
-		for _, listener in packet.getListeners() do
-			runListener(listener, value, player)
+			emitter(packet.onClientReceived, value, player)
 		end
 	end
 end

@@ -1,7 +1,7 @@
 --[[
 	The file that contains the function for handling and creating namespaces.
 	Namespaces aren't really anything special, they are just an encapsulation to make it easier to manage packets and structs.
-	
+
 	Dependency management is fun!
 ]]
 
@@ -31,6 +31,7 @@ return function(
 	local structs = namespacesDependencies.empty()
 
 	local result = {}
+	local namespace = {}
 
 	if runContext == "server" then
 		local constructedNamespace = {
@@ -51,6 +52,8 @@ return function(
 		end
 
 		namespaceReplicator:write(constructedNamespace)
+
+		namespace.server = result
 	elseif runContext == "client" then
 		-- yes, this means that packets technically don't need to be defined on the client
 		-- we do it anyway for typechecking and perf shortcuts
@@ -61,7 +64,9 @@ return function(
 
 			packetIDs.set(namespaceData.packets[key], result[key])
 		end
+
+		namespace.client = result
 	end
 
-	return result
+	return namespace
 end
