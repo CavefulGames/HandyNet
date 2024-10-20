@@ -76,6 +76,8 @@ packets.command()
 ```
 
 # TO-DOs
+- [ ] Complete english part of `README.md`.
+- [ ] Publish to `pesde`.
 - [x] Simplify `definePacket` arguments. (remove props and replace to `defineReliablePacket` and `defineUnreliablePacket`)
 - [x] Bind events using `LimeSignal`.
 - [x] Add optional size argument for `string` datatype.
