@@ -1,9 +1,10 @@
 <h1 align="center">English</h1>
-Coming soon!
+# HandyNet
+[ByteNet](https://github.com/ffrostfall/ByteNet) fork made more handy
 
 <h1 align="center">한국어</h1>
 
-## HandyNet
+# HandyNet
 더 Handy해진 [ByteNet](https://github.com/ffrostfall/ByteNet)의 포크
 
 ## 특징
@@ -72,3 +73,14 @@ end)
 
 packets.command()
 ```
+
+# TO-DOs
+- [x] Simplify `definePacket` arguments. (remove props and replace to `defineReliablePacket` and `defineUnreliablePacket`)
+- [x] Bind events using `LimeSignal`.
+- [x] Add optional size argument for `string` datatype.
+- [ ] Cache `string` datatype read/writer for reusing.
+- [x] Clarify the datatype names.
+- [x] Add more strict typechecking for client/server.
+- [x] Set repository language to Luau.
+- [ ] Add new `CFrame` serdes.
+- [ ] Implement `defineReliableCommand` and `defineUnreliableCommand`.
