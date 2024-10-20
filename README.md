@@ -1,4 +1,9 @@
-# HandyNet
+# English
+Coming soon!
+
+# 한국어
+
+## HandyNet
 더 Handy해진 [ByteNet](https://github.com/ffrostfall/ByteNet)의 포크
 
 ## 특징
