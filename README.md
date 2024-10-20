@@ -1,7 +1,7 @@
-# English
+<h1 align="center">English</h1>
 Coming soon!
 
-# 한국어
+<h1 align="center">한국어</h1>
 
 ## HandyNet
 더 Handy해진 [ByteNet](https://github.com/ffrostfall/ByteNet)의 포크
