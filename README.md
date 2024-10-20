@@ -37,12 +37,14 @@ end)
 ```lua
 -- client.luau
 
-packets.hello:sendToServer({
+local packets = require(path.to.packets).client
+
+packets.hello.sendToServer({
 	message = "hi ya",
 	cf = CFrame.new()
 })
 
-packets.hello.onReceived:connect(function()
+packets.hello.onClientReceived:connect(function()
 	print("received hello from server")
 end)
 
@@ -52,12 +54,14 @@ packets.command()
 ```lua
 -- server.luau
 
-packets.hello:sendTo(player, {
+local packets = require(path.to.packets).server
+
+packets.hello.sendTo(player, {
 	message = "hi ya",
 	cf = CFrame.new()
 })
 
-packets.hello.onReceived:connect(function()
+packets.hello.onServerReceived:connect(function()
 	print("received hello from client")
 end)
 
