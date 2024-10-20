@@ -1,13 +1,4 @@
-Packages
-
-# Project place file
-/ByteNet.rbxlx
-
-# Roblox Studio lock files
-/*.rbxlx.lock
-/*.rbxl.lock
-
+roblox_packages
+/*.lock
 build
-node_modules
 sourcemap.json
-site
