@@ -1,16 +1,17 @@
+--!strict
 --!native
 --!optimize 2
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 
-local testPackets = require(ReplicatedStorage.shared.testPackets)
+local packets = require(ReplicatedStorage.shared.testPackets).client
 
---ReplicatedStorage.RemoteEvent.OnClientEvent:Connect(function()
---print(data)
---end)
-
-testPackets.myPacket.listen(function(_)
-	--print("Confirming server -> client")
-	--print(data)
+packets.myPacket.onClientReceived:connect(function(data)
+	print("Confirming server -> client")
+	print(data)
 end)
---
-task.wait(2)
+
+RunService.Heartbeat:Connect(function()
+	packets.myPacket.sendToServer({false})
+end)

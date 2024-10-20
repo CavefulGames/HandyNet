@@ -1,12 +1,11 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local ByteNet = require(ReplicatedStorage.Packages.ByteNet)
---
-return ByteNet.defineNamespace("game", function()
+local HandyNet = require(ReplicatedStorage.Packages.HandyNet)
+
+return HandyNet.defineNamespace("game", function()
 	return {
-		myPacket = ByteNet.definePacket({
-			value = ByteNet.array(ByteNet.bool),
-			reliabilityType = "reliable",
-		}),
+		myPacket = HandyNet.defineReliablePacket(
+			HandyNet.array(HandyNet.boolean)
+		),
 	}
 end)

@@ -1,6 +1,6 @@
 {
-  "tree": {
-    "$path": "src"
-  },
-  "name": "bytenet"
+	"tree": {
+		"$path": "src"
+	},
+	"name": "handynet"
 }
