@@ -1,6 +1,6 @@
 --!native
 --!optimize 2
-local Players = game:GetService("Players")
+
 local RunService = game:GetService("RunService")
 
 local types = require(script.Parent.Parent.types)
@@ -33,41 +33,14 @@ return function(value: types.dataTypeInterface<any>, reliable: boolean, id: numb
 
 	local exported = {}
 
-	-- RunContext error checking that doesn't have performance drawbacks
-	-- setmetatable(exported, {
-	-- 	__index = function(index)
-	-- 		if
-	-- 			(index == "sendTo" or index == "sendToAllExcept" or index == "sendToAll")
-	-- 			and moduleRunContext == "client"
-	-- 		then
-	-- 			error("You cannot use sendTo, sendToAllExcept, or sendToAll on the client")
-	-- 		elseif index == "send" and moduleRunContext == "server" then
-	-- 			error("You cannot use send on the server")
-	-- 		end
-	-- 	end,
-	-- })
-
 	-- exposed for the reader file
 	exported.reader = value.read
 
 	if moduleRunContext == "server" then
-		-- function exported.sendToList(data, players: { Player })
-		-- 	for _, player in players do
-		-- 		serverSendFunction(player, id, writer, data)
-		-- 	end
-		-- end
 
 		function exported.sendTo(data, player: Player)
 			serverSendFunction(player, id, writer, data)
 		end
-
-		-- function exported.sendToAllExcept(data, except: Player)
-		-- 	for _, player: Player in Players:GetPlayers() do
-		-- 		if player ~= except then
-		-- 			serverSendFunction(player, id, writer, data)
-		-- 		end
-		-- 	end
-		-- end
 
 		function exported.broadcast(data)
 			serverSendAllFunction(id, writer, data)
