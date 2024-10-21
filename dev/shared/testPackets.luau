@@ -7,5 +7,8 @@ return HandyNet.defineNamespace("game", function()
 		myPacket = HandyNet.defineReliablePacket(
 			HandyNet.string(HandyNet.u8)
 		),
+		helloCommand = HandyNet.defineReliableCommand(function()
+			print("Merhaba!")
+		end)
 	}
 end)

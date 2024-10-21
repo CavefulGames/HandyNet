@@ -13,6 +13,8 @@ packets.myPacket.onServerReceived:connect(function(data, player)
 	print(data)
 end)
 
-RunService.Heartbeat:Connect(function()
-	packets.myPacket.broadcast({true})
-end)
+-- RunService.Heartbeat:Connect(function()
+-- 	packets.myPacket.broadcast("aa")
+-- end)
+
+packets.helloCommand()

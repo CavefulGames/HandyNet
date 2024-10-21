@@ -12,6 +12,8 @@ packets.myPacket.onClientReceived:connect(function(data)
 	print(data)
 end)
 
-RunService.Heartbeat:Connect(function()
-	packets.myPacket.sendToServer("ez")
-end)
+-- RunService.Heartbeat:Connect(function()
+-- 	packets.myPacket.sendToServer("ez")
+-- end)
+
+packets.helloCommand()

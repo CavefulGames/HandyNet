@@ -51,9 +51,17 @@ type EmptyEvent = nil & {
 export type HandyNet = {
 	defineReliablePacket: <T>(value: T) -> Packet<T>,
 	defineUnreliablePacket: <T>(value: T) -> Packet<T>,
+	defineReliableCommand: (fn: () -> ()) -> (Player?) -> (),
+	defineUnreliableCommand: (fn: () -> ()) -> (Player?) -> (),
 	defineNamespace: <T>(name: string, namespace: () -> T) -> ({
-		server: { [string]: { sendToServer: nil, onClientReceived: EmptyEvent } } & T,
-		client: { [string]: { sendTo: nil, broadcast: nil, onServerReceived: EmptyEvent } } & T
+		server: { [string]: typeof(setmetatable(
+			{} :: { sendToServer: nil, onClientReceived: EmptyEvent },
+			{} :: { __call: (Player?) -> () }
+		)) } & T,
+		client: { [string]: typeof(setmetatable(
+			{} :: { sendTo: nil, broadcast: nil, onServerReceived: EmptyEvent },
+			{} :: { __call: () -> () }
+		)) } & T
 	}),
 
 	struct: <T>(format: T) -> T,
