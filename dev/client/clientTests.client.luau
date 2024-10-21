@@ -13,5 +13,5 @@ packets.myPacket.onClientReceived:connect(function(data)
 end)
 
 RunService.Heartbeat:Connect(function()
-	packets.myPacket.sendToServer({false})
+	packets.myPacket.sendToServer("ez")
 end)

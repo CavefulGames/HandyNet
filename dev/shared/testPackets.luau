@@ -5,7 +5,7 @@ local HandyNet = require(ReplicatedStorage.Packages.HandyNet)
 return HandyNet.defineNamespace("game", function()
 	return {
 		myPacket = HandyNet.defineReliablePacket(
-			HandyNet.array(HandyNet.boolean)
+			HandyNet.string(HandyNet.u8)
 		),
 	}
 end)
