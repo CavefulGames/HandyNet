@@ -55,5 +55,5 @@ return function(value: types.dataTypeInterface<any>, reliable: boolean, id: numb
 		exported.onClientReceived = LimeSignal.Event.from(emitter)
 	end
 
-	return exported
+	return exported, exported
 end

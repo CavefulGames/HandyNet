@@ -65,7 +65,7 @@ return (
 		AlignedCFrame = alignedcframe(),
 		UnalignedCFrame = unalignedcframe(),
 		RawCFrame = rawcframe(),
-		string = string(),
+		string = string,
 		Vector2 = vec2(),
 		Vector3 = vec3(),
 		buffer = buff(),

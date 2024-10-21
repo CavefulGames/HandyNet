@@ -16,6 +16,7 @@ return function(fn: () -> (), reliable: boolean, id: number)
 		innerPacket.onServerReceived:connect(fn)
 
 		command = function(player: Player?)
+			fn()
 			if player then
 				innerPacket.sendTo(nil, player)
 			else
@@ -26,9 +27,10 @@ return function(fn: () -> (), reliable: boolean, id: number)
 		innerPacket.onClientReceived:connect(fn)
 
 		command = function()
+			fn()
 			innerPacket.sendToServer(nil)
 		end
 	end
 
-	return command
+	return innerPacket, command
 end

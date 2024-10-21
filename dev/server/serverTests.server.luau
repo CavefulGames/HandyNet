@@ -13,8 +13,9 @@ packets.myPacket.onServerReceived:connect(function(data, player)
 	print(data)
 end)
 
--- RunService.Heartbeat:Connect(function()
--- 	packets.myPacket.broadcast("aa")
--- end)
+RunService.Heartbeat:Connect(function()
+	packets.myPacket.broadcast("aa")
+end)
 
+task.wait(5)
 packets.helloCommand()

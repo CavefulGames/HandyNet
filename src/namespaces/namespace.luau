@@ -26,7 +26,7 @@ return function(
 
 	namespacesDependencies.start(name)
 	local packets: {
-		[string]: (id: number) -> any,
+		[string]: (id: number) -> (any, any),
 	} = input()
 	local structs = namespacesDependencies.empty()
 
@@ -42,9 +42,10 @@ return function(
 		for key in packets do
 			count += 1
 			constructedNamespace.packets[key] = count
-			result[key] = packets[key](count)
+			local packet, public = packets[key](count)
+			result[key] = public
 
-			packetIDs.set(count, result[key])
+			packetIDs.set(count, packet)
 		end
 
 		for index, value in structs do
@@ -59,10 +60,11 @@ return function(
 		-- we do it anyway for typechecking and perf shortcuts
 		local namespaceData = namespaceReplicator:read() :: types.namespaceData
 
-		for key, packet in packets do
-			result[key] = packet(namespaceData.packets[key])
+		for key, initialize in packets do
+			local packet, public = initialize(namespaceData.packets[key])
+			result[key] = public
 
-			packetIDs.set(namespaceData.packets[key], result[key])
+			packetIDs.set(namespaceData.packets[key], packet)
 		end
 
 		namespace.client = result
