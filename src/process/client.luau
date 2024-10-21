@@ -45,10 +45,10 @@ function clientProcess.sendUnreliable(id: number, writer: (value: any) -> (), da
 end
 
 function clientProcess.start()
-	local reliableRemote = ReplicatedStorage:WaitForChild("ByteNetReliable")
+	local reliableRemote = ReplicatedStorage:WaitForChild("HandyNetReliable") :: RemoteEvent
 	reliableRemote.OnClientEvent:Connect(onClientEvent)
 
-	local unreliableRemote = ReplicatedStorage:WaitForChild("ByteNetUnreliable")
+	local unreliableRemote = ReplicatedStorage:WaitForChild("HandyNetUnreliable") :: UnreliableRemoteEvent
 	unreliableRemote.OnClientEvent:Connect(onClientEvent)
 
 	RunService.Heartbeat:Connect(function()
