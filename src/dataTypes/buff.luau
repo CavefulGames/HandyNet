@@ -39,7 +39,7 @@ return function(size: (types.dataTypeInterface<number> | number)?): types.dataTy
 			read = function(b: buffer, cursor: number)
 				local freshBuffer = buffer.create(size)
 
-				buffer.copy(freshBuffer, 0, b, cursor + size, size)
+				buffer.copy(freshBuffer, 0, b, cursor, size)
 
 				return freshBuffer, size
 			end,

@@ -32,7 +32,7 @@ return function(size: (types.dataTypeInterface<number> | number)?): types.dataTy
 	elseif type(size) == "number" then
 		rw = {
 			read = function(b: buffer, cursor: number)
-				return buffer.readstring(b, cursor + size, size), size
+				return buffer.readstring(b, cursor, size), size
 			end,
 			write = function(data: string)
 				dyn_alloc(size)
