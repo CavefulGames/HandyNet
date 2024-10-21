@@ -16,10 +16,10 @@ local cframe = {
 			buffer.readf32(b, cursor + 8)
 
 		local qx, qy, qz =
-			buffer.readu16(b, cursor + 13),
-			buffer.readu16(b, cursor + 15),
-			buffer.readu16(b, cursor + 17)
-		local qw = (qx^2 + qy^2 + qz^2)^.5
+			buffer.readu16(b, cursor + 12) / I16_PRECISION,
+			buffer.readu16(b, cursor + 14) / I16_PRECISION,
+			buffer.readu16(b, cursor + 16) / I16_PRECISION
+			local qw = math.sqrt(1 - (qx^2 + qy^2 + qz^2))
 
 		return CFrame.new(x, y, z, qx, qy, qz, qw), 18
 	end,
@@ -51,7 +51,7 @@ local cframe = {
 
 		writeu16NoAlloc(qx*I16_PRECISION) -- 2 bytes
 		writeu16NoAlloc(qy*I16_PRECISION) -- 2 bytes
-		writeu16NoAlloc(qz*I16_PRECISION) -- 2 bytes = total 19 bytes
+		writeu16NoAlloc(qz*I16_PRECISION) -- 2 bytes = total 18 bytes
 	end
 }
 

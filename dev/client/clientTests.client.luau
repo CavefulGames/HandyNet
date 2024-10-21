@@ -12,6 +12,14 @@ packets.myPacket.onClientReceived:connect(function(data)
 	print(data)
 end)
 
+local part = Instance.new("Part")
+part.Anchored = true
+part.BrickColor = BrickColor.Red()
+part.CFrame = CFrame.new(1, 1, 1)-- * CFrame.Angles(0.2, 0.4, 0.6)
+part.Parent = workspace
+
+packets.myPacket.sendToServer(part.CFrame)
+
 -- RunService.Heartbeat:Connect(function()
 -- 	packets.myPacket.sendToServer("ez")
 -- end)

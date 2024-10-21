@@ -11,6 +11,12 @@ local packets = require(ReplicatedStorage.shared.testPackets).server
 packets.myPacket.onServerReceived:connect(function(data, player)
 	print("Confirming client -> server")
 	print(data)
+
+	local part = Instance.new("Part")
+	part.Anchored = true
+	part.BrickColor = BrickColor.Blue()
+	part.CFrame = data
+	part.Parent = workspace
 end)
 
 -- RunService.Heartbeat:Connect(function()

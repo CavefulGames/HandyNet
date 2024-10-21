@@ -23,10 +23,10 @@ local cframe = {
 		end
 
 		local qx, qy, qz =
-			buffer.readu16(b, cursor + 13),
-			buffer.readu16(b, cursor + 15),
-			buffer.readu16(b, cursor + 17)
-		local qw = (qx^2 + qy^2 + qz^2)^.5
+			buffer.readu16(b, cursor + 13) / I16_PRECISION,
+			buffer.readu16(b, cursor + 15) / I16_PRECISION,
+			buffer.readu16(b, cursor + 17) / I16_PRECISION
+		local qw = math.sqrt(1 - (qx^2 + qy^2 + qz^2))
 
 		return CFrame.new(x, y, z, qx, qy, qz, qw), 19
 	end,
