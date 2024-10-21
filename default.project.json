@@ -1,6 +1,6 @@
 {
 	"tree": {
-		"$path": "src/lib.luau"
+		"$path": "src"
 	},
 	"name": "handynet"
 }

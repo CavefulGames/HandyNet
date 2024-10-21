@@ -1,15 +1,15 @@
 #:schema https://raw.githubusercontent.com/jiwonz/pesde-schema/refs/heads/0.5/schema/generated/pesde.json
 name = "caveful_games/handynet"
-version = "0.1.0"
+version = "0.1.1"
 description = "ByteNet fork made more handy"
 authors = ["ffrostfall", "jiwonz"]
 repository = "https://github.com/CavefulGames/HandyNet"
 license = "MIT"
-includes = ["src", "README.md", "LICENSE.md", "pesde.toml"]
+includes = ["lib.luau", "src", "README.md", "LICENSE.md", "pesde.toml"]
 
 [target]
 environment = "roblox"
-lib = "src/lib.luau"
+lib = "lib.luau"
 build_files = ["src"]
 
 [scripts]
