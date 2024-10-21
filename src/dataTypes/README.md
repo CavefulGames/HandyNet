@@ -1,4 +1,4 @@
-This folder contains all of the data types contained within ByteNet. They are all imported manually in `src/init.luau`.
+This folder contains all of the data types contained within HandyNet. They are all imported manually in `src/init.luau`.
 
 Each data type follows the `dataTypeInterface` type. Static types (That don't need any parameters) should generally have the following template:
 ```lua

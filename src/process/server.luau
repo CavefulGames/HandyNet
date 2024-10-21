@@ -87,12 +87,12 @@ end
 
 function serverProcess.start()
 	local reliableRemote = Instance.new("RemoteEvent")
-	reliableRemote.Name = "ByteNetReliable"
+	reliableRemote.Name = "HandyNetReliable"
 	reliableRemote.OnServerEvent:Connect(onServerEvent)
 	reliableRemote.Parent = ReplicatedStorage
 
 	local unreliableRemote = Instance.new("UnreliableRemoteEvent")
-	unreliableRemote.Name = "ByteNetUnreliable"
+	unreliableRemote.Name = "HandyNetUnreliable"
 	unreliableRemote.OnServerEvent:Connect(onServerEvent)
 	unreliableRemote.Parent = ReplicatedStorage
 
