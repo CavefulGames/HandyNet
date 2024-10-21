@@ -4,8 +4,8 @@ local types = require(script.Parent.Parent.types)
 local writeu16 = bufferWriter.writeu16
 local writecopy = bufferWriter.writecopy
 local dyn_alloc = bufferWriter.dyn_alloc
-
-local buff = {
+local rwCache = {}
+local defaultBuffRW = {
 	read = function(b: buffer, cursor: number)
 		local length = buffer.readu16(b, cursor)
 		local freshBuffer = buffer.create(length)
@@ -26,6 +26,55 @@ local buff = {
 	end,
 }
 
-return function(): types.dataTypeInterface<buffer>
-	return buff
+return function(size: (types.dataTypeInterface<number> | number)?): types.dataTypeInterface<buffer>
+	local rw = rwCache[size]
+	if rw then
+		return rw
+	end
+
+	if size == nil then
+		return defaultBuffRW
+	elseif type(size) == "number" then
+		rw = {
+			read = function(b: buffer, cursor: number)
+				local freshBuffer = buffer.create(size)
+
+				buffer.copy(freshBuffer, 0, b, cursor + size, size)
+
+				return freshBuffer, size
+			end,
+			write = function(data: buffer)
+				writeu16(size)
+
+				dyn_alloc(size)
+
+				writecopy(data)
+			end
+		}
+	else
+		rw = {
+			read = function(b: buffer, cursor: number)
+				local length, written = size.read(b, cursor)
+
+				local freshBuffer = buffer.create(length)
+
+				buffer.copy(freshBuffer, 0, b, cursor + written, length)
+
+				return freshBuffer, length + written
+			end,
+			write = function(data: buffer)
+				local length = buffer.len(data)
+				size.write(length)
+
+				dyn_alloc(length)
+
+				writecopy(data)
+			end
+		}
+	end
+
+	-- caches read & writer
+	rwCache[size] = rw
+
+	return rw
 end
