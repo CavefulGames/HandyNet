@@ -7,6 +7,11 @@
 - HandyNet is a fork of ByteNet and shares most of its implementation.
 - The code design and ideas are derived from `kitty-utils/net`.
 
+### Installation (via pesde)
+```sh
+pesde add caveful_games/handynet
+```
+
 ### Differences from ByteNet
 - Resizable `ByteNet.string` data type.
 - Simplified `definePacket` API.

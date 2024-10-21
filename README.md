@@ -9,6 +9,11 @@
 - ByteNet의 포크이며 대부분의 구현을 공유합니다.
 - 코드 설계 및 아이디어는 `kitty-utils/net`에서 파생되었습니다.
 
+### 설치 (via pesde)
+```sh
+pesde add caveful_games/handynet
+```
+
 ### ByteNet과 차이점
 - ~~HandyNet은 속도보다 메모리 사용량에 더 초점을 맞췄기 때문에 이론적으로 ByteNet이 더 빠를 수 있습니다. (ByteNet은 더 빠른 속도를 위해 페킷마다 메소드 함수를 생성하지만 HandyNet은 메타테이블을 활용하여 함수를 재활용합니다.)~~ 메모리 사용량이 그렇게 크지 않고 정적인 크기를 차지하므로 그대로 클로저를 사용합니다.
 - `ByteNet.string` 자료형의 크기를 설정할 수 있습니다.
@@ -74,7 +79,7 @@ packets.command()
 
 # TO-DOs
 - [x] Complete english part of `README.md`.
-- [ ] Publish to `pesde`.
+- [x] Publish to `pesde`.
 - [x] Simplify `definePacket` arguments. (remove props and replace to `defineReliablePacket` and `defineUnreliablePacket`)
 - [x] Bind events using `LimeSignal`.
 - [x] Add optional size argument for `string` data type.
@@ -87,4 +92,4 @@ packets.command()
 - [x] Add `AlignedCFrame` data type.
 - [x] Add `UnalignedCFrame` data type.
 - [x] Add `RawCFrame` data type.
-- [ ] Implement `defineReliableCommand` and `defineUnreliableCommand`.
+- [x] Implement `defineReliableCommand` and `defineUnreliableCommand`.
