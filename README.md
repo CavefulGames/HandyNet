@@ -1,18 +1,15 @@
-<h1 align="center">English</h1>
+[English](https://github.com/CavefulGames/HandyNet/blob/main/README_en.md) 👈
 
-# HandyNet
-[ByteNet](https://github.com/ffrostfall/ByteNet) fork made more handy
+# 한국어
 
-<h1 align="center">한국어</h1>
-
-# HandyNet
+## HandyNet
 더 Handy해진 [ByteNet](https://github.com/ffrostfall/ByteNet)의 포크
 
-## 특징
+### 특징
 - ByteNet의 포크이며 대부분의 구현을 공유합니다.
 - 코드 설계 및 아이디어는 `kitty-utils/net`에서 파생되었습니다.
 
-## ByteNet과 차이점
+### ByteNet과 차이점
 - ~~HandyNet은 속도보다 메모리 사용량에 더 초점을 맞췄기 때문에 이론적으로 ByteNet이 더 빠를 수 있습니다. (ByteNet은 더 빠른 속도를 위해 페킷마다 메소드 함수를 생성하지만 HandyNet은 메타테이블을 활용하여 함수를 재활용합니다.)~~ 메모리 사용량이 그렇게 크지 않고 정적인 크기를 차지하므로 그대로 클로저를 사용합니다.
 - `ByteNet.string` 자료형의 크기를 설정할 수 있습니다.
 - `definePacket`의 인수 `reliablityType` 속성이 `defineReliablePacket`과 `defineUnreliablePacket` 두가지 함수로 나뉨에 따라 테이블 `props` 인수를 받지 않고 기존에 `value` 속성이었던 값 자료형만 단일 인수로 받습니다. (간소화)
@@ -22,7 +19,7 @@
 - 이벤트 신호는 `LimeSignal`을 사용하여 받습니다. (결과적으로 Connection을 disconnect하기 더 간편해졌으며, 더 이상 `definePacket`에서 이벤트 신호 방식을 설정하지 않아도됩니다.)
 - HandyNet은 타입스크립트 타입을 지원하지 않습니다.
 
-## 사용 예제
+# Example Usage
 ```lua
 -- packets.luau
 
@@ -80,11 +77,14 @@ packets.command()
 - [ ] Publish to `pesde`.
 - [x] Simplify `definePacket` arguments. (remove props and replace to `defineReliablePacket` and `defineUnreliablePacket`)
 - [x] Bind events using `LimeSignal`.
-- [x] Add optional size argument for `string` datatype.
-- [ ] Add optional size argument for `buff` datatype like `string` datatype.
-- [x] Cache `string` datatype's read & writer for reusing.
-- [x] Clarify the datatype names.
+- [x] Add optional size argument for `string` data type.
+- [ ] Add optional size argument for `buff` data type like `string` data type.
+- [x] Cache `string` data type's read & writer for reusing.
+- [x] Clarify the data type names.
 - [x] Add more strict typechecking for client/server.
 - [x] Set repository language to Luau.
-- [ ] Add new `CFrame` serdes.
+- [x] Add new `CFrame` serdes. (Quaternion)
+- [x] Add `AlignedCFrame` data type.
+- [x] Add `UnalignedCFrame` data type.
+- [x] Add `RawCFrame` data type.
 - [ ] Implement `defineReliableCommand` and `defineUnreliableCommand`.

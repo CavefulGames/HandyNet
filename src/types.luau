@@ -76,6 +76,9 @@ export type HandyNet = {
 	Vector2: Vector2,
 	buffer: (size: number?) -> (buffer),
 	CFrame: CFrame,
+	AlignedCFrame: CFrame,
+	UnalignedCFrame: CFrame,
+	RawCFrame: CFrame,
 	map: <K, V>(key: K, value: V) -> { [K]: V },
 }
 

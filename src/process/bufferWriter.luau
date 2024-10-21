@@ -4,7 +4,7 @@
 --[[
 	Collects all write operations into a queue.
 	When the buffer is written, it will be written in the order of the queue.
-	
+
 	All operations take in 2 parameters: the cursor and the value.
 	Knowing this we can easily attach everything in a nice table, where
 	{
@@ -12,7 +12,7 @@
 		[2] = cursor,
 		[3] = value
 	}
-	
+
 	A lot of these functions just exist as shorthand optimizations.
 ]]
 local types = require(script.Parent.Parent.types)
@@ -84,6 +84,11 @@ end
 
 function bufferWriter.writeu16(value: number)
 	alloc(2)
+	buffer.writeu16(buff, cursor, value)
+	cursor += 2
+end
+
+function bufferWriter.writeu16NoAlloc(value: number)
 	buffer.writeu16(buff, cursor, value)
 	cursor += 2
 end
