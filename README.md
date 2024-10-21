@@ -78,7 +78,7 @@ packets.command()
 - [x] Simplify `definePacket` arguments. (remove props and replace to `defineReliablePacket` and `defineUnreliablePacket`)
 - [x] Bind events using `LimeSignal`.
 - [x] Add optional size argument for `string` data type.
-- [ ] Add optional size argument for `buff` data type like `string` data type.
+- [x] Add optional size argument for `buff` data type like `string` data type.
 - [x] Cache `string` data type's read & writer for reusing.
 - [x] Clarify the data type names.
 - [x] Add more strict typechecking for client/server.
