@@ -71,7 +71,7 @@ export type HandyNet = {
 	i32: number,
 	f32: number,
 	f64: number,
-	string: string,
+	string: (size: number?) -> (string),
 	Vector3: Vector3,
 	Vector2: Vector2,
 	buffer: buffer,
