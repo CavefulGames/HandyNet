@@ -13,6 +13,7 @@ pesde add caveful_games/handynet
 ```
 
 ### Differences from ByteNet
+- (From 0.2.x) Due to the dynamic typing of `HandyNet.send`, it can theoretically be slightly slower than `ByteNet.sendTo` and `ByteNet.sendToAll` on the server. (It is more simple and more type-safe and removes the need for `Namespace.server` and `Namespace.client`, except in cases where the player argument is used on the client.)
 - Resizable `ByteNet.string` data type.
 - Simplified `definePacket` API.
 - Some data type names have been made clearer.
