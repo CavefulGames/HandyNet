@@ -26,6 +26,8 @@ pesde add caveful_games/handynet
 - ~~서버/클라이언트의 예측 및 동기화 모델, 어드민 커맨드를 만들 때 유용하게 사용될 수 있는 `Command`가 추가되었습니다.~~ (`event`로 대체됨)
 - 이벤트 신호는 `LimeSignal`을 사용하여 받습니다. (결과적으로 Connection을 disconnect하기 더 간편해졌으며, 더 이상 `definePacket`에서 이벤트 신호 방식을 설정하지 않아도됩니다.)
 - HandyNet은 타입스크립트 타입을 지원하지 않습니다.
+- 쿼터니언을 사용하여 CFrame 역/직렬화 압축. (`HandyNet.RawCFrame`으로 `ByteNet.cframe`과 동일한 역/직렬화를 사용할 수 있습니다.)
+- 더 많은 자료형 지원.
 
 # Example Usage
 ```lua
@@ -37,7 +39,8 @@ return HandyNet.defineNamespace("example", function()
 			"client->server",
 			HandyNet.struct({
 				message = HandyNet.string(HandyNet.u8), -- Customizable string size (defaults to u16)
-				cf = HandyNet.CFrame
+				cf = HandyNet.CFrame, -- Uses quaternion to compress!
+				enum = HandyNet.Enum.KeyCode
 			})
 			-- default: "reliable"
 		),
@@ -74,7 +77,8 @@ local packets = require(path.to.packets)
 
 packets.hello.send({
 	message = "hi ya",
-	cf = CFrame.new()
+	cf = CFrame.new(),
+	enum = Enum.KeyCode.X
 })
 
 packets.countUp.fire()

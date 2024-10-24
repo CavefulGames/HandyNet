@@ -20,3 +20,5 @@ pesde add caveful_games/handynet
 - ~~Added `Command`, which is handier for designing a client/server synchronization model.~~ (Replaced by `event`s)
 - Events and connections are handled by `LimeSignal` which is fork of `LemonSignal`. (Simple event handling method)
 - HandyNet does not support TypeScript.
+- New serdes for `CFrame`.
+- New data types: `RawCFrame`(equal to `ByteNet.cframe`), `CFrame`(uses Quaternion to compress), `AlignedCFrame`, `UnalignedCFrame`, `Enum`, and `BrickColor`
