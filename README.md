@@ -120,5 +120,5 @@ end)
 - [x] Update README.md.
 - [x] Add `ServerPacket` and `ClientPacket` types.
 - [x] Test `0.2.0` and fix bugs.
-- [ ] Release and publish into pesde.
+- [x] Release and publish into pesde.
 - [x] Add korean(한국어) docs comments.
