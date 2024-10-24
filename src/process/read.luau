@@ -25,7 +25,7 @@ if runContext == "server" then
 
 			readCursor += valueLength
 
-			emitter(packet.onServerReceived, value, player)
+			emitter(packet.event, value, player)
 		end
 	end
 elseif runContext == "client" then
@@ -43,7 +43,7 @@ elseif runContext == "client" then
 
 			readCursor += valueLength
 
-			emitter(packet.onClientReceived, value, player)
+			emitter(packet.event, value, player)
 		end
 	end
 end

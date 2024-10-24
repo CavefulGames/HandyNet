@@ -42,10 +42,9 @@ return function(
 		for key in packets do
 			count += 1
 			constructedNamespace.packets[key] = count
-			local packet, public = packets[key](count)
-			result[key] = public
+			result[key] = packets[key](count)
 
-			packetIDs.set(count, packet)
+			packetIDs.set(count, result[key])
 		end
 
 		for index, value in structs do
@@ -61,14 +60,15 @@ return function(
 		local namespaceData = namespaceReplicator:read() :: types.namespaceData
 
 		for key, initialize in packets do
-			local packet, public = initialize(namespaceData.packets[key])
-			result[key] = public
+			result[key] = initialize(namespaceData.packets[key])
 
-			packetIDs.set(namespaceData.packets[key], packet)
+			packetIDs.set(namespaceData.packets[key], result[key])
 		end
 
 		namespace.client = result
 	end
+
+	namespace.shared = result
 
 	return namespace
 end

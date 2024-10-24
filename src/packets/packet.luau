@@ -15,45 +15,48 @@ local moduleRunContext: "server" | "client" = if RunService:IsServer() then "ser
 	We use closures here instead of metatables for performance
 	It's just faster to use closures than metatables
 ]]
-return function(value: types.dataTypeInterface<any>, reliable: boolean, id: number)
-	local serverSendFunction: (player: Player, id: number, writer: (value: any) -> (), data: any) -> () = if reliable
-		then server.sendPlayerReliable
-		else server.sendPlayerUnreliable
-
-	local serverSendAllFunction: (id: number, writer: (value: any) -> (), data: any) -> () = if reliable
-		then server.sendAllReliable
-		else server.sendAllUnreliable
-
-	local clientSendFunction: (id: number, writer: (value: any) -> (), data: any) -> () = if reliable
-		then client.sendReliable
-		else client.sendUnreliable
-
-	-- shorcut to avoid indexxing
-	local writer = value.write
-
+return function(value: types.dataTypeInterface<any>, direction: "client->server" | "server->client", reliable: boolean, id: number)
 	local exported = {}
 
-	-- exposed for the reader file
-	exported.reader = value.read
+	if direction == "server->client" then
+		if moduleRunContext == "server" then
+			local writer = value.write
 
-	if moduleRunContext == "server" then
+			local serverSendFunction: (player: Player, id: number, writer: (value: any) -> (), data: any) -> () = if reliable
+				then server.sendPlayerReliable
+				else server.sendPlayerUnreliable
 
-		function exported.sendTo(data, player: Player)
-			serverSendFunction(player, id, writer, data)
+			local serverSendAllFunction: (id: number, writer: (value: any) -> (), data: any) -> () = if reliable
+				then server.sendAllReliable
+				else server.sendAllUnreliable
+
+			function exported.send(data, player: Player?)
+				if player then
+					serverSendFunction(player, id, writer, data)
+				else
+					serverSendAllFunction(id, writer, data)
+				end
+			end
+		elseif moduleRunContext == "client" then
+			exported.reader = value.read
+			exported.event = LimeSignal.Event.from(emitter)
 		end
+	elseif direction == "client->server" then
+		if moduleRunContext == "client" then
+			local writer = value.write
 
-		function exported.broadcast(data)
-			serverSendAllFunction(id, writer, data)
+			local clientSendFunction: (id: number, writer: (value: any) -> (), data: any) -> () = if reliable
+				then client.sendReliable
+				else client.sendUnreliable
+
+			function exported.send(data)
+				clientSendFunction(id, writer, data)
+			end
+		elseif moduleRunContext == "server" then
+			exported.reader = value.read
+			exported.event = LimeSignal.Event.from(emitter)
 		end
-
-		exported.onServerReceived = LimeSignal.Event.from(emitter)
-	elseif moduleRunContext == "client" then
-		function exported.sendToServer(data)
-			clientSendFunction(id, writer, data)
-		end
-
-		exported.onClientReceived = LimeSignal.Event.from(emitter)
 	end
 
-	return exported, exported
+	return exported
 end

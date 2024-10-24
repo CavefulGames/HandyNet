@@ -12,11 +12,7 @@ local nothing = require(script.Parent.Parent.dataTypes.nothing)()
 
 local moduleRunContext: "server" | "client" = if RunService:IsServer() then "server" else "client"
 
-local COMMAND_HANDLE_ERROR = "This command is already initialized and being handled"
-
-return function(id: number)
-	local reliable = true -- No unreilable setting supported. because commands should be reliable for better synced state
-	local command
+return function(reliable: boolean, id: number)
 	local exported = {}
 
 	if moduleRunContext == "server" then
@@ -32,22 +28,14 @@ return function(id: number)
 		exported.reader = nothing.read
 		exported.event = event
 
-		local handle
-		command = function(fn: (Player) -> ())
-			if handle then
-				error(COMMAND_HANDLE_ERROR)
-			end
-			handle = fn
-			event:connect(fn)
-			return function(player: Player)
-				if player then
-					handle(player)
-					serverSendFunction(player, id, nothing.write, nil)
-				else
-					for _, plr in Players:GetPlayers() do
-						handle(plr)
-					end
-					serverSendAllFunction(id, nothing.write, nil)
+		function exported.fire(player: Player?)
+			if player then
+				serverSendFunction(player, id, nothing.write)
+				emitter(event, player)
+			else
+				serverSendAllFunction(id, nothing.write)
+				for _, plr in Players:GetPlayers() do
+					emitter(event, plr)
 				end
 			end
 		end
@@ -62,19 +50,11 @@ return function(id: number)
 		exported.reader = nothing.read
 		exported.event = event
 
-		local handle
-		command = function(fn: (Player) -> ())
-			if handle then
-				error(COMMAND_HANDLE_ERROR)
-			end
-			handle = fn
-			event:connect(fn)
-			return function()
-				handle(localPlayer)
-				clientSendFunction(id, nothing.write, nil)
-			end
+		function exported.fire()
+			clientSendFunction(id, nothing.write)
+			emitter(event, localPlayer)
 		end
 	end
 
-	return exported, command
+	return exported
 end

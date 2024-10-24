@@ -28,42 +28,20 @@ export type dataTypeInterface<T> = {
 
 -- Somewhat public facing: used as return result in definePacket
 type Packet<T> = {
-	onServerReceived: LimeSignal.Event<T, Player>,
-	onClientReceived: LimeSignal.Event<T>,
-
-	-- server
-	broadcast: (data: T) -> (),
-	sendTo: (data: T, target: Player) -> (),
-
-	-- client
-	sendToServer: (data: T) -> (),
+	event: LimeSignal.Event<T, Player?>,
+	send: (data: T, target: Player?) -> (),
 }
 
-type EmptyEvent = nil & {
-	connect: nil,
-	connectOnce: nil,
-	disconnectAll: nil,
-	wait: nil,
-	from: nil
+type Event = {
+	event: LimeSignal.Event<Player?>,
+	fire: (player: Player?) -> ()
 }
 
 -- Library type
 export type HandyNet = {
-	defineReliablePacket: <T>(value: T) -> Packet<T>,
-	defineUnreliablePacket: <T>(value: T) -> Packet<T>,
-	defineReliableCommand: (fn: () -> ()) -> (Player?) -> (),
-	defineUnreliableCommand: (fn: () -> ()) -> (Player?) -> (),
-	defineNamespace: <T>(name: string, namespace: () -> T) -> ({
-		server: { [string]: typeof(setmetatable(
-			{} :: { sendToServer: nil, onClientReceived: EmptyEvent },
-			{} :: { __call: (Player?) -> () }
-		)) } & T,
-		client: { [string]: typeof(setmetatable(
-			{} :: { sendTo: nil, broadcast: nil, onServerReceived: EmptyEvent },
-			{} :: { __call: () -> () }
-		)) } & T
-	}),
-
+	definePacket: <T>(direction: "server->client" | "client->server", value: T, reliability: "reliable" | "unreliable") -> Packet<T>,
+	defineEvent: (reliability: "reliable" | "unreliable") -> (Event),
+	defineNamespace: <T>(name: string, namespace: () -> T) -> T,
 	struct: <T>(format: T) -> T,
 	boolean: boolean,
 	array: <T>(value: T) -> { [number]: T },
@@ -88,6 +66,8 @@ export type HandyNet = {
 	UnalignedCFrame: CFrame,
 	RawCFrame: CFrame,
 	map: <K, V>(key: K, value: V) -> { [K]: V },
+	BrickColor: BrickColor,
+	Enum: typeof(Enum)
 }
 
 return nil

@@ -1,13 +1,14 @@
 local RunService = game:GetService("RunService")
 
-local defineReliableCommand = require(script.commands.defineReliableCommand)
-local defineUnreliableCommand = require(script.commands.defineUnreliableCommand)
+local defineEvent = require(script.events.defineEvent)
 local clientProcess = require(script.process.client)
 local array = require(script.dataTypes.array)
 local bool = require(script.dataTypes.bool)
 local buff = require(script.dataTypes.buff)
 local cframe = require(script.dataTypes.cframe)
 local alignedcframe = require(script.dataTypes.alignedcframe)
+local brickcolor = require(script.dataTypes.brickcolor)
+local enum = require(script.dataTypes.enum)
 local rawcframe = require(script.dataTypes.rawcframe)
 local float32 = require(script.dataTypes.float32)
 local float64 = require(script.dataTypes.float64)
@@ -28,8 +29,7 @@ local unknown = require(script.dataTypes.unknown)
 local vec2 = require(script.dataTypes.vec2)
 local vec3 = require(script.dataTypes.vec3)
 local namespace = require(script.namespaces.namespace)
-local defineReliablePacket = require(script.packets.defineReliablePacket)
-local defineUnreliablePacket = require(script.packets.defineUnreliablePacket)
+local definePacket = require(script.packets.definePacket)
 local serverProcess = require(script.process.server)
 local values = require(script.replicated.values)
 local types = require(script.types)
@@ -44,10 +44,8 @@ end
 
 return (
 	table.freeze({
-		defineReliablePacket = defineReliablePacket,
-		defineUnreliablePacket = defineUnreliablePacket,
-		defineReliableCommand = defineReliableCommand,
-		defineUnreliableCommand = defineUnreliableCommand,
+		definePacket = definePacket,
+		defineEvent = defineEvent,
 		defineNamespace = namespace,
 
 		array = array,
@@ -74,5 +72,7 @@ return (
 		Instance = inst(),
 		unknown = unknown(),
 		nothing = nothing(),
+		BrickColor = brickcolor(),
+		Enum = enum
 	}) :: any
 ) :: types.HandyNet
