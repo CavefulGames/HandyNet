@@ -101,6 +101,10 @@ packets.countUp.event:connect(function()
 end)
 ```
 
+# Credits
+- [ByteNet](https://github.com/ffrostfall/ByteNet) for original source codes. (licensed under MIT license)
+- Special thanks to [Mark-Marks](https://github.com/Mark-Marks) for major feedbacks.
+
 # TO-DOs (0.2.x)
 - [x] Change `Packet.onServerReceived` and `Packet.onClientReceived` to `Packet.event`.
 - [x] Change `HandyNet.defineReliablePacket` and `HandyNet.defineUnreliablePacket` to `HandyNet.definePacket` and provide reliability argument.
