@@ -17,6 +17,6 @@ pesde add caveful_games/handynet
 - Resizable `ByteNet.string` data type.
 - Simplified `definePacket` API.
 - Some data type names have been made clearer.
-- Added `Command`, which is handier for designing a client/server synchronization model.
+- ~~Added `Command`, which is handier for designing a client/server synchronization model.~~ (Replaced by `event`s)
 - Events and connections are handled by `LimeSignal` which is fork of `LemonSignal`. (Simple event handling method)
 - HandyNet does not support TypeScript.

@@ -23,7 +23,7 @@ pesde add caveful_games/handynet
 - `definePacket`의 인수 `reliablityType` 속성이 `defineReliablePacket`과 `defineUnreliablePacket` 두가지 함수로 나뉨에 따라 테이블 `props` 인수를 받지 않고 기존에 `value` 속성이었던 값 자료형만 단일 인수로 받습니다. (간소화)
 - 몇가지 자료형 이름이 명확해졌습니다. (ex. `ByteNet.vec3` -> `HandyNet.Vector3`)
 - ~~`Namespace` 타입에 `server`와 `client` 속성이 추가됨으로써 서버/클라이언트 구분을 더 명확히한 타입체킹이 가능합니다.~~
-- 서버/클라이언트의 예측 및 동기화 모델, 어드민 커맨드를 만들 때 유용하게 사용될 수 있는 `Command`가 추가되었습니다.
+- ~~서버/클라이언트의 예측 및 동기화 모델, 어드민 커맨드를 만들 때 유용하게 사용될 수 있는 `Command`가 추가되었습니다.~~ (`event`로 대체됨)
 - 이벤트 신호는 `LimeSignal`을 사용하여 받습니다. (결과적으로 Connection을 disconnect하기 더 간편해졌으며, 더 이상 `definePacket`에서 이벤트 신호 방식을 설정하지 않아도됩니다.)
 - HandyNet은 타입스크립트 타입을 지원하지 않습니다.
 
