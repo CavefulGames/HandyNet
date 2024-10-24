@@ -1,5 +1,6 @@
 # [English](https://github.com/CavefulGames/HandyNet/blob/main/README_en.md) 👈
 - [Example Usage](#example-usage)
+- [Credits](#credits)
 - [TO-DOs](#to-dos-02x)
 
 # 한국어
