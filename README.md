@@ -106,4 +106,5 @@ end)
 - [x] Add `BrickColor` and `Enum` data type.
 - [x] Update README.md.
 - [ ] Test 0.2.0
-- [ ] Add korean(한국어) translated comments.
+- [ ] Release and publish into pesde.
+- [ ] (maybe 0.2.1?) Add korean(한국어) translated comments.
