@@ -101,7 +101,7 @@ packets.hello.event:connect(function()
 	print("received hello from client")
 end)
 
-packets.countUp.event:connect(function()
+packets.countUp.connect(function()
 	print("client has fired countUp event!")
 end)
 ```
