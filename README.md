@@ -109,6 +109,7 @@ end)
 # Credits
 - [ByteNet](https://github.com/ffrostfall/ByteNet) for original source codes. (licensed under MIT license)
 - Special thanks to [Mark-Marks](https://github.com/Mark-Marks) for major feedbacks.
+- Special thanks to roasted_shrimps for new CFrame serdes idea.
 
 # TO-DOs (0.2.x)
 - [x] Change `Packet.onServerReceived` and `Packet.onClientReceived` to `Packet.event`.
