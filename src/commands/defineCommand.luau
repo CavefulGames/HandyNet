@@ -3,8 +3,8 @@
 
 local command = require(script.Parent.command)
 
-return function(fn: () -> ())
+return function()
 	return function(id: number)
-		return command(fn, false, id)
+		return command(id)
 	end
 end
