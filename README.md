@@ -121,4 +121,4 @@ end)
 - [x] Add `ServerPacket` and `ClientPacket` types.
 - [x] Test `0.2.0` and fix bugs.
 - [ ] Release and publish into pesde.
-- [ ] Add korean(한국어) translated comments.
+- [x] Add korean(한국어) docs comments.
