@@ -61,7 +61,7 @@ export type HandyNet = {
 		네임스페이스에 새로운 이벤트를 정의합니다.
 
 		```luau
-		HandyNet.defineEvent(신뢰성) -- 기본값: "reliable"
+		HandyNet.defineEvent(신뢰성) -- 기본 신뢰성: "reliable"
 		```
 	]=]
 	defineEvent: (reliability: ("reliable" | "unreliable")?) -> (Event),
