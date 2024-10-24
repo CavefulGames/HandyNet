@@ -1,7 +1,7 @@
 local types = require(script.Parent.Parent.types)
 local bufferWriter = require(script.Parent.Parent.process.bufferWriter)
 
-local writeu16 = bufferWriter.writeu16
+local writeu32 = bufferWriter.writeu32
 local rwCache = {}
 
 return setmetatable({}, {
@@ -17,7 +17,7 @@ return setmetatable({}, {
 		rw = {
 			read = function(b: buffer, cursor: number)
 				local item
-				local value = buffer.readu16(b, cursor)
+				local value = buffer.readu32(b, cursor)
 				for _,v in items do
 					if v.Value == value then
 						item = v
@@ -27,7 +27,7 @@ return setmetatable({}, {
 				return item
 			end,
 			write = function(data: EnumItem)
-				writeu16(data.Value)
+				writeu32(data.Value)
 			end
 		}
 
