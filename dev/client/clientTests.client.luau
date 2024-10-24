@@ -18,7 +18,8 @@ part.BrickColor = BrickColor.Red()
 part.CFrame = CFrame.new(1, 1, 1)-- * CFrame.Angles(0.2, 0.4, 0.6)
 part.Parent = workspace
 
-packets.myPacket.send(part.CFrame)
+-- packets.myPacket.send(part.CFrame)
+packets.myPacket.send(Enum.KeyCode.A :: any)
 
 -- RunService.Heartbeat:Connect(function()
 -- 	packets.myPacket.sendToServer("ez")

@@ -8,15 +8,19 @@ local RunService = game:GetService("RunService")
 
 local packets = require(ReplicatedStorage.shared.testPackets)
 
-packets.myPacket.event:connect(function(data, player)
-	print("Confirming client -> server")
-	print(data)
+-- packets.myPacket.event:connect(function(data, player)
+-- 	print("Confirming client -> server")
+-- 	print(data)
 
-	local part = Instance.new("Part")
-	part.Anchored = true
-	part.BrickColor = BrickColor.Blue()
-	part.CFrame = data
-	part.Parent = workspace
+-- 	local part = Instance.new("Part")
+-- 	part.Anchored = true
+-- 	part.BrickColor = BrickColor.Blue()
+-- 	part.CFrame = data
+-- 	part.Parent = workspace
+-- end)
+
+packets.myPacket.event:connect(function(data)
+	print("received enum:", data)
 end)
 
 -- RunService.Heartbeat:Connect(function()

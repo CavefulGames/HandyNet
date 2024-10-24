@@ -24,7 +24,7 @@ return setmetatable({}, {
 						break
 					end
 				end
-				return item
+				return item, 4
 			end,
 			write = function(data: EnumItem)
 				writeu32(data.Value)
