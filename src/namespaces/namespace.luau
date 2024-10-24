@@ -31,7 +31,6 @@ return function(
 	local structs = namespacesDependencies.empty()
 
 	local result = {}
-	local namespace = {}
 
 	if runContext == "server" then
 		local constructedNamespace = {
@@ -52,8 +51,6 @@ return function(
 		end
 
 		namespaceReplicator:write(constructedNamespace)
-
-		namespace.server = result
 	elseif runContext == "client" then
 		-- yes, this means that packets technically don't need to be defined on the client
 		-- we do it anyway for typechecking and perf shortcuts
@@ -64,11 +61,7 @@ return function(
 
 			packetIDs.set(namespaceData.packets[key], result[key])
 		end
-
-		namespace.client = result
 	end
 
-	namespace.shared = result
-
-	return namespace
+	return result
 end

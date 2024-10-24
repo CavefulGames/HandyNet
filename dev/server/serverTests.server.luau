@@ -6,9 +6,9 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
-local packets = require(ReplicatedStorage.shared.testPackets).server
+local packets = require(ReplicatedStorage.shared.testPackets)
 
-packets.myPacket.onServerReceived:connect(function(data, player)
+packets.myPacket.event:connect(function(data, player)
 	print("Confirming client -> server")
 	print(data)
 
@@ -23,5 +23,13 @@ end)
 -- 	packets.myPacket.broadcast("aa")
 -- end)
 
-task.wait(5)
-packets.helloCommand()
+local counter = require(ReplicatedStorage.shared.counter)
+
+Players.PlayerAdded:Connect(function()
+	counter.countUp()
+end)
+
+packets.countUp.connect(function(player)
+	task.wait()
+	print("count in server:", counter.counts[player])
+end)

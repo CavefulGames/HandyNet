@@ -24,18 +24,24 @@ return function(reliable: boolean, id: number)
 			then server.sendAllReliable
 			else server.sendAllUnreliable
 
-		local event = LimeSignal.Event.from(emitter)
+		local event = LimeSignal.Event.from(emitter) :: LimeSignal.Event<nil, Player>
 		exported.reader = nothing.read
 		exported.event = event
+
+		function exported.connect(fn)
+			return event:connect(function(_, player)
+				fn(player)
+			end)
+		end
 
 		function exported.fire(player: Player?)
 			if player then
 				serverSendFunction(player, id, nothing.write)
-				emitter(event, player)
+				emitter(event, nil, player)
 			else
 				serverSendAllFunction(id, nothing.write)
 				for _, plr in Players:GetPlayers() do
-					emitter(event, plr)
+					emitter(event, nil, plr)
 				end
 			end
 		end
@@ -46,13 +52,19 @@ return function(reliable: boolean, id: number)
 			then client.sendReliable
 			else client.sendUnreliable
 
-		local event = LimeSignal.Event.from(emitter)
+		local event = LimeSignal.Event.from(emitter) :: LimeSignal.Event<nil, Player>
 		exported.reader = nothing.read
 		exported.event = event
 
+		function exported.connect(fn)
+			return event:connect(function()
+				fn(localPlayer)
+			end)
+		end
+
 		function exported.fire()
 			clientSendFunction(id, nothing.write)
-			emitter(event, localPlayer)
+			emitter(event, nil, localPlayer)
 		end
 	end
 

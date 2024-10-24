@@ -59,14 +59,18 @@ local counts = {}
 
 local function countUp(player)
 	local count = counts[player]
-	if count then
-		counts[player] += 1
-	else
-		counts[player] = 0
+	if not count then
+		count = 0
+		counts[player] = count
 	end
+
+	count += 1
+	counts[player] = count
+
+	print("count:", count)
 end
 
-packets.countUp.event:connect(countUp)
+packets.countUp.connect(countUp)
 
 return {}
 ```
@@ -109,11 +113,12 @@ end)
 # TO-DOs (0.2.x)
 - [x] Change `Packet.onServerReceived` and `Packet.onClientReceived` to `Packet.event`.
 - [x] Change `HandyNet.defineReliablePacket` and `HandyNet.defineUnreliablePacket` to `HandyNet.definePacket` and provide reliability argument.
-- [x] Replace `command`s with `event`s.
+- [x] Replace `Command`s with `Event`s.
 - [x] Remove `Namespace.client` and `Namespace.server`. `sendTo`, `sendToServer`, and `broadcast` are replaced by `send`.
 - [x] `Packet`s are now one directional.
 - [x] Add `BrickColor` and `Enum` data type.
 - [x] Update README.md.
-- [ ] Test 0.2.0
+- [x] Add `ServerPacket` and `ClientPacket` types.
+- [x] Test `0.2.0` and fix bugs.
 - [ ] Release and publish into pesde.
-- [ ] (maybe 0.2.1?) Add korean(한국어) translated comments.
+- [ ] Add korean(한국어) translated comments.

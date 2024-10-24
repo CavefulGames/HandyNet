@@ -27,20 +27,26 @@ export type dataTypeInterface<T> = {
 }
 
 -- Somewhat public facing: used as return result in definePacket
-type Packet<T> = {
-	event: LimeSignal.Event<T, Player?>,
+type ServerPacket<T> = {
+	event: LimeSignal.Event<T>,
+	send: (data: T, target: Player?) -> (),
+}
+
+type ClientPacket<T> = {
+	event: LimeSignal.Event<T, Player>,
 	send: (data: T, target: Player?) -> (),
 }
 
 type Event = {
-	event: LimeSignal.Event<Player?>,
+	connect: (fn: (player: Player) -> ()) -> (LimeSignal.Connection<nil, Player>),
 	fire: (player: Player?) -> ()
 }
 
 -- Library type
 export type HandyNet = {
-	definePacket: <T>(direction: "server->client" | "client->server", value: T, reliability: "reliable" | "unreliable") -> Packet<T>,
-	defineEvent: (reliability: "reliable" | "unreliable") -> (Event),
+	definePacket: (<T>(direction: "server->client", value: T, reliability: ("reliable" | "unreliable")?) -> ServerPacket<T>)
+		& (<T>(direction: "client->server", value: T, reliability: ("reliable" | "unreliable")?) -> ClientPacket<T>),
+	defineEvent: (reliability: ("reliable" | "unreliable")?) -> (Event),
 	defineNamespace: <T>(name: string, namespace: () -> T) -> T,
 	struct: <T>(format: T) -> T,
 	boolean: boolean,

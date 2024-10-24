@@ -4,11 +4,10 @@ local HandyNet = require(ReplicatedStorage.Packages.HandyNet)
 
 return HandyNet.defineNamespace("game", function()
 	return {
-		myPacket = HandyNet.defineReliablePacket(
-			HandyNet.AlignedCFrame
+		myPacket = HandyNet.definePacket(
+			"client->server",
+			HandyNet.CFrame
 		),
-		helloCommand = HandyNet.defineReliableCommand(function()
-			print("Merhaba!")
-		end)
+		countUp = HandyNet.defineEvent()
 	}
 end)
