@@ -6,8 +6,10 @@ return HandyNet.defineNamespace("game", function()
 	return {
 		myPacket = HandyNet.definePacket(
 			"client->server",
-			HandyNet.Enum.KeyCode
+			HandyNet.Enum.KeyCode :: Enum.KeyCode
 		),
-		countUp = HandyNet.defineEvent()
+		events = {
+			countUp = HandyNet.defineEvent()
+		}
 	}
 end)

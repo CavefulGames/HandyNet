@@ -25,9 +25,10 @@ return function(
 	local namespaceReplicator = values.access(name)
 
 	namespacesDependencies.start(name)
-	local packets: {
-		[string]: (id: number) -> (any, any),
-	} = input()
+	type packets = {
+		[string]: ((id: number) -> any) | packets
+	}
+	local packets: packets = input()
 	local structs = namespacesDependencies.empty()
 
 	local result = {}
@@ -38,13 +39,23 @@ return function(
 			packets = {},
 		}
 
-		for key in packets do
-			count += 1
-			constructedNamespace.packets[key] = count
-			result[key] = packets[key](count)
+		local function registerRecursive(tbl: packets, currentResult: {}, namespacePackets: {})
+			for key, value in tbl do
+				if type(value) == "function" then
+					count += 1
+					namespacePackets[key] = count
+					currentResult[key] = value(count)
 
-			packetIDs.set(count, result[key])
+					packetIDs.set(count, currentResult[key])
+				elseif type(value) == "table" then
+					currentResult[key] = {}
+					namespacePackets[key] = {}
+					registerRecursive(value, currentResult[key], namespacePackets[key])
+				end
+			end
 		end
+
+		registerRecursive(packets, result, constructedNamespace.packets)
 
 		for index, value in structs do
 			constructedNamespace.structs[index] = value
@@ -56,11 +67,20 @@ return function(
 		-- we do it anyway for typechecking and perf shortcuts
 		local namespaceData = namespaceReplicator:read() :: types.namespaceData
 
-		for key, initialize in packets do
-			result[key] = initialize(namespaceData.packets[key])
+		local function registerRecursive(tbl: packets, currentResult: {}, namespacePackets: {})
+			for key, value in tbl do
+				if type(value) == "function" then
+					currentResult[key] = value(namespacePackets[key])
 
-			packetIDs.set(namespaceData.packets[key], result[key])
+					packetIDs.set(namespacePackets[key], currentResult[key])
+				elseif type(value) == "table" then
+					currentResult[key] = {}
+					registerRecursive(value, currentResult[key], namespacePackets[key])
+				end
+			end
 		end
+
+		registerRecursive(packets, result, namespaceData.packets)
 	end
 
 	return result

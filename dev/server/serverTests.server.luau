@@ -33,7 +33,6 @@ Players.PlayerAdded:Connect(function()
 	counter.countUp()
 end)
 
-packets.countUp.connect(function(player)
-	task.wait()
+packets.events.countUp.connect(function(player)
 	print("count in server:", counter.counts[player])
 end)

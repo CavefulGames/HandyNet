@@ -1,7 +1,7 @@
 # [English](https://github.com/CavefulGames/HandyNet/blob/main/README_en.md) 👈
 - [Example Usage](#example-usage)
 - [Credits](#credits)
-- [TO-DOs](#to-dos-02x)
+- [TO-DOs](#to-dos)
 
 # 한국어
 
@@ -41,7 +41,7 @@ return HandyNet.defineNamespace("example", function()
 			HandyNet.struct({
 				message = HandyNet.string(HandyNet.u8), -- Customizable string size (defaults to u16)
 				cf = HandyNet.CFrame, -- Uses quaternion to compress!
-				enum = HandyNet.Enum.KeyCode
+				enum = HandyNet.Enum.KeyCode :: Enum.KeyCode -- Weird type error with enums..
 			})
 			-- default: "reliable"
 		),
@@ -111,7 +111,8 @@ end)
 - Special thanks to [Mark-Marks](https://github.com/Mark-Marks) for major feedbacks.
 - Special thanks to roasted_shrimps for new CFrame serdes idea.
 
-# TO-DOs (0.2.x)
+# TO-DOs
+## `v0.2.0`
 - [x] Change `Packet.onServerReceived` and `Packet.onClientReceived` to `Packet.event`.
 - [x] Change `HandyNet.defineReliablePacket` and `HandyNet.defineUnreliablePacket` to `HandyNet.definePacket` and provide reliability argument.
 - [x] Replace `Command`s with `Event`s.
@@ -123,3 +124,6 @@ end)
 - [x] Test `0.2.0` and fix bugs.
 - [x] Release and publish into pesde.
 - [x] Add korean(한국어) docs comments.
+## `v0.2.1`
+- [x] Fix `HandyNet.Enum` types and documented.
+- [x] Packet definitions can be nested.

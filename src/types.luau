@@ -558,7 +558,7 @@ export type HandyNet = {
 			return {
 				example = HandyNet.definePacket(
 					"client->server",
-					HandyNet.Enum.KeyCode
+					HandyNet.Enum.KeyCode :: Enum.KeyCode -- idk why roblox doesn't allow this
 				)
 			}
 		end)
@@ -566,7 +566,7 @@ export type HandyNet = {
 		packets.example.send(Enum.KeyCode.X)
 		```
 	]=]
-	Enum: typeof(Enum)
+	Enum: typeof(Enum) & { [any]: any }
 }
 
 return nil

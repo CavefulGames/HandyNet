@@ -2,7 +2,7 @@ local packets = require(script.Parent.testPackets)
 
 local counts = {}
 
-packets.countUp.connect(function(player: Player)
+packets.events.countUp.connect(function(player: Player)
 	local count = counts[player]
 	if not count then
 		count = 0
@@ -16,6 +16,6 @@ end)
 return {
 	counts = counts,
 	countUp = function()
-		packets.countUp.fire()
+		packets.events.countUp.fire()
 	end
 }
