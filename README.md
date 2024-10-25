@@ -19,7 +19,7 @@ pesde add caveful_games/handynet
 
 ### ByteNet과 차이점
 - (`v0.2.0` 부터) `HandyNet.send`의 다이나믹 타입으로 인하여 이론적으로 서버에서의 `ByteNet.sendTo`과 `ByteNet.sendToAll`보다 조금 느릴 수 있습니다. (대신 심플하고 클라이언트에서 플레이어 인수를 사용하는 상황 제외 조금 더 타입에 안전하며 `Namespace.server`, `Namespace.client`가 필요없어졌습니다. -> 적어진 메모리 사용량)
-- (`v0.2.0` 부터) 패킷은 단방향으로 보내기가 가능합니다. (`"server->client"`, `"client->server"`)
+- (`v0.2.0` 부터) 패킷은 단방향으로 보내야합니다. (`"server->client"`, `"client->server"`)
 - (`v0.2.1` 부터) 네스팅된 패킷 정의가 가능합니다.
 - ~~HandyNet은 속도보다 메모리 사용량에 더 초점을 맞췄기 때문에 이론적으로 ByteNet이 더 빠를 수 있습니다. (ByteNet은 더 빠른 속도를 위해 페킷마다 메소드 함수를 생성하지만 HandyNet은 메타테이블을 활용하여 함수를 재활용합니다.)~~ 메모리 사용량이 그렇게 크지 않고 정적인 크기를 차지하므로 그대로 클로저를 사용합니다.
 - `ByteNet.string` 자료형의 크기를 설정할 수 있습니다.
