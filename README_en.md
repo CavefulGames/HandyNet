@@ -13,7 +13,9 @@ pesde add caveful_games/handynet
 ```
 
 ### Differences from ByteNet
-- (From 0.2.x) Due to the dynamic typing of `HandyNet.send`, it can theoretically be slightly slower than `ByteNet.sendTo` and `ByteNet.sendToAll` on the server. (It is more simple and more type-safe and removes the need for `Namespace.server` and `Namespace.client`, except in cases where the player argument is used on the client.)
+- (From `v0.2.0`) Due to the dynamic typing of `HandyNet.send`, it can theoretically be slightly slower than `ByteNet.sendTo` and `ByteNet.sendToAll` on the server. (It is more simple and more type-safe and removes the need for `Namespace.server` and `Namespace.client`, except in cases where the player argument is used on the client.)
+- (From `v0.2.0`) `Packet`s are one directional.
+- (From `v0.2.1`) Packet definitions can be nested for labeling purpose.
 - Resizable `ByteNet.string` data type.
 - Simplified `definePacket` API.
 - Some data type names have been made clearer.
@@ -21,4 +23,4 @@ pesde add caveful_games/handynet
 - Events and connections are handled by `LimeSignal` which is fork of `LemonSignal`. (Simple event handling method)
 - HandyNet does not support TypeScript.
 - New serdes for `CFrame`.
-- New data types: `RawCFrame`(equal to `ByteNet.cframe`), `CFrame`(uses Quaternion to compress), `AlignedCFrame`, `UnalignedCFrame`, `Enum`, and `BrickColor`
+- New data types: `RawCFrame`(equal to `ByteNet.cframe`), `CFrame`(uses Quaternion to compress into 13~19 bytes), `AlignedCFrame`, `UnalignedCFrame`, `Enum`, and `BrickColor`
