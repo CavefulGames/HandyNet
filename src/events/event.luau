@@ -6,7 +6,7 @@ local Players = game:GetService("Players")
 
 local client = require(script.Parent.Parent.process.client)
 local server = require(script.Parent.Parent.process.server)
-local LimeSignal = require(script.Parent.Parent.Parent.limesignal)
+local LimeSignal = require(script.Parent.Parent.Parent.roblox_packages.limesignal)
 local emitter = require(script.Parent.Parent.emitter)
 local nothing = require(script.Parent.Parent.dataTypes.nothing)()
 

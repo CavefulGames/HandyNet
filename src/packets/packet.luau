@@ -6,7 +6,7 @@ local RunService = game:GetService("RunService")
 local types = require(script.Parent.Parent.types)
 local client = require(script.Parent.Parent.process.client)
 local server = require(script.Parent.Parent.process.server)
-local LimeSignal = require(script.Parent.Parent.Parent.limesignal)
+local LimeSignal = require(script.Parent.Parent.Parent.roblox_packages.limesignal)
 local emitter = require(script.Parent.Parent.emitter)
 
 local moduleRunContext: "server" | "client" = if RunService:IsServer() then "server" else "client"

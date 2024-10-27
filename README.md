@@ -108,10 +108,10 @@ end)
 - Special thanks to roasted_shrimps for new CFrame serdes idea.
 
 # TO-DOs
-## `v0.2.1`
-- [x] Fix `HandyNet.Enum` types and documented.
-- [x] Packet definitions can be nested.
 
 ## `v0.2.2`
 - [x] Make README.md english as default.
 - [x] Publish to pesde to take effect with newer README.md.
+
+## `v0.2.3`
+- [x] Fix dependencies require error.

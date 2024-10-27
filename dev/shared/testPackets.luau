@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local HandyNet = require(ReplicatedStorage.Packages.HandyNet)
+local HandyNet = require(ReplicatedStorage.HandyNet)
 
 return HandyNet.defineNamespace("game", function()
 	return {

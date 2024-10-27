@@ -1,4 +1,4 @@
-local LimeSignal = require(script.Parent.Parent.limesignal)
+local LimeSignal = require(script.Parent.Parent.roblox_packages.limesignal)
 
 export type namespaceData = {
 	packets: {

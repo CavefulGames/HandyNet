@@ -1,6 +1,6 @@
 #:schema https://raw.githubusercontent.com/jiwonz/pesde-schema/refs/heads/0.5/schema/generated/pesde.json
 name = "caveful_games/handynet"
-version = "0.2.2"
+version = "0.2.3"
 description = "ByteNet fork made more handy"
 authors = ["ffrostfall", "jiwonz"]
 repository = "https://github.com/CavefulGames/HandyNet"
