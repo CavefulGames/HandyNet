@@ -113,4 +113,4 @@ end)
 - [x] Fix dependencies require error.
 
 ## `v0.2.4`
-- [x] Change `math.sqrt` into `^.5`.
+- [x] Change `math.sqrt` into `^.5` (Slightly faster)
