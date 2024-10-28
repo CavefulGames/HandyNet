@@ -14,6 +14,7 @@ pesde add caveful_games/handynet
 ```
 
 ### Differences from ByteNet
+- (From `v0.3.0`) Don't have to write a function when defining namespace.
 - (From `v0.2.0`) Due to the dynamic typing of `HandyNet.send`, it can theoretically be slightly slower than `ByteNet.sendTo` and `ByteNet.sendToAll` on the server. (It is more simple and more type-safe and removes the need for `Namespace.server` and `Namespace.client`, except in cases where the player argument is used on the client.)
 - (From `v0.2.0`) `Packet`s are one directional.
 - (From `v0.2.1`) Packet definitions can be nested for labeling purpose.
@@ -30,20 +31,18 @@ pesde add caveful_games/handynet
 ```lua
 -- packets.luau
 
-return HandyNet.defineNamespace("example", function()
-	return {
-		hello = HandyNet.definePacket(
-			"client->server",
-			HandyNet.struct({
-				message = HandyNet.string(HandyNet.u8), -- Customizable string size (defaults to u16)
-				cf = HandyNet.CFrame, -- Uses quaternion to compress!
-				enum = HandyNet.Enum.KeyCode :: Enum.KeyCode -- Weird type error with enums..
-			})
-			-- default: "reliable"
-		),
-		countUp = HandyNet.defineEvent("unreliable")
-  	}
-end)
+return HandyNet.defineNamespace("example", {
+	hello = HandyNet.definePacket(
+		"client->server",
+		HandyNet.struct({
+			message = HandyNet.string(HandyNet.u8), -- Customizable string size (defaults to u16)
+			cf = HandyNet.CFrame, -- Uses quaternion to compress!
+			enum = HandyNet.Enum.KeyCode :: Enum.KeyCode -- Weird type error with enums..
+		})
+		-- default: "reliable"
+	),
+	countUp = HandyNet.defineEvent("unreliable")
+})
 ```
 
 ```lua
