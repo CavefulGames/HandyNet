@@ -15,11 +15,11 @@ local packets = require(ReplicatedStorage.shared.testPackets)
 local part = Instance.new("Part")
 part.Anchored = true
 part.BrickColor = BrickColor.Red()
-part.CFrame = CFrame.new(1, 1, 1)-- * CFrame.Angles(0.2, 0.4, 0.6)
+part.CFrame = CFrame.new(1, 1, 1) * CFrame.Angles(0.2, 0.4, 0.6)
 part.Parent = workspace
 
--- packets.myPacket.send(part.CFrame)
-packets.myPacket.send(Enum.KeyCode.A)
+packets.myPacket.send(part.CFrame)
+-- packets.myPacket.send(Enum.KeyCode.A)
 
 -- RunService.Heartbeat:Connect(function()
 -- 	packets.myPacket.sendToServer("ez")
