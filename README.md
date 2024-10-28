@@ -112,5 +112,6 @@ end)
 ## `v0.2.3`
 - [x] Fix dependencies require error.
 
-## `v0.2.4`
+## `v0.3.0`
 - [x] Change `math.sqrt` into `^.5` (Slightly faster)
+- [x] Simplify the `defineNamespace` (Breaking change)

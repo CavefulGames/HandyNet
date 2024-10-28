@@ -16,19 +16,17 @@ local runContext: "server" | "client" = if RunService:IsServer() then "server" e
 
 local count = 0
 
+type Packets = {
+	[string]: ((id: number) -> any) | Packets
+}
+
 return function(
 	name: string,
-	input: () -> {
-		[string]: any,
-	}
+	packets: Packets
 )
 	local namespaceReplicator = values.access(name)
 
 	namespacesDependencies.start(name)
-	type packets = {
-		[string]: ((id: number) -> any) | packets
-	}
-	local packets: packets = input()
 	local structs = namespacesDependencies.empty()
 
 	local result = {}
@@ -39,7 +37,7 @@ return function(
 			packets = {},
 		}
 
-		local function registerRecursive(tbl: packets, currentResult: {}, namespacePackets: {})
+		local function registerRecursive(tbl: Packets, currentResult: {}, namespacePackets: {})
 			for key, value in tbl do
 				if type(value) == "function" then
 					count += 1
@@ -67,7 +65,7 @@ return function(
 		-- we do it anyway for typechecking and perf shortcuts
 		local namespaceData = namespaceReplicator:read() :: types.namespaceData
 
-		local function registerRecursive(tbl: packets, currentResult: {}, namespacePackets: {})
+		local function registerRecursive(tbl: Packets, currentResult: {}, namespacePackets: {})
 			for key, value in tbl do
 				if type(value) == "function" then
 					currentResult[key] = value(namespacePackets[key])
