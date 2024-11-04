@@ -244,7 +244,6 @@ export type HandyNet = {
 	]=]
 	u32: number,
 	--[=[
-		8비트 정수 자료형 (1 바이트)
         8-bit integer data type (1 byte)
 
 		```luau
@@ -325,13 +324,13 @@ export type HandyNet = {
 	]=]
 	f64: number,
 	--[=[
-		문자열 자료형
+		string data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
 				"client->server",
-				HandyNet.string(2) -- 기본 크기: 16비트
+				HandyNet.string(2) -- defult size: 16bit
 			)
 		})
 
@@ -377,7 +376,8 @@ export type HandyNet = {
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
 				"client->server",
-				HandyNet.buffer(2) -- 기본 크기: 16비트
+				HandyNet.buffer(2) -- defult size: 16bit
+
 			)
 		})
 
@@ -407,8 +407,8 @@ export type HandyNet = {
 			)
 		})
 
-		packets.example.send(CFrame.new(1, 2, 3)) -- 정렬됨 (13 바이트)
-		packets.example.send(CFrame.new(1, 2, 3) * CFrame.Angles(math.rad(25), 0, 0)) -- 정렬되지 않음 (19 바이트)
+		packets.example.send(CFrame.new(1, 2, 3)) -- sorted (13 byte)
+		packets.example.send(CFrame.new(1, 2, 3) * CFrame.Angles(math.rad(25), 0, 0)) -- not sorted (19 byte)
 		```
 	]=]
 	CFrame: CFrame,
@@ -449,7 +449,7 @@ export type HandyNet = {
 	--[=[
         CFrame data type having 3D position and rotation (24 byte)
 
-		CFrame값의 성분을 그대로 32비트 부동소수점으로 패킹하여 전송합니다.
+        the components of the CFrame value are transmitted as 32-bit floating point numbers.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
