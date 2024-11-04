@@ -45,38 +45,38 @@ type Event = {
 -- Library type
 export type HandyNet = {
 	--[=[
-		네임스페이스에 새로운 패킷을 정의합니다.
+        defines a new packet in a namespace
 
 		```luau
 		HandyNet.definePacket(
-			방향,
-			자료형,
-			패킷 신뢰성 (기본값: "reliable")
+			direction,
+			data type,
+            packet reliability (defult: "reliable")
 		)
 		```
 	]=]
 	definePacket: (<T>(direction: "server->client", value: T, reliability: ("reliable" | "unreliable")?) -> ServerPacket<T>)
 		& (<T>(direction: "client->server", value: T, reliability: ("reliable" | "unreliable")?) -> ClientPacket<T>),
 	--[=[
-		네임스페이스에 새로운 이벤트를 정의합니다.
+        defines a new event in a namespace 
 
 		```luau
-		HandyNet.defineEvent(신뢰성) -- 기본 신뢰성: "reliable"
+		HandyNet.defineEvent(reliability) -- defult reliability: "reliable"
 		```
 	]=]
 	defineEvent: (reliability: ("reliable" | "unreliable")?) -> (Event),
 	--[=[
-		새로운 네임스페이스를 정의합니다.
+        defines a new namespace
 
 		```luau
-		HandyNet.defineNamespace("네임스페이스 이름", {
-			[패킷 이름] = 패킷 정의
+		HandyNet.defineNamespace("namespace_name", {
+			[packet_name] = defines packet
 		})
 		```
 	]=]
 	defineNamespace: <T>(name: string, packets: T) -> T,
 	--[=[
-		구조체 자료형
+        structure data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -99,7 +99,7 @@ export type HandyNet = {
 	]=]
 	struct: <T>(format: T) -> T,
 	--[=[
-		불리언 자료형 (1 바이트)
+        boolean data type (1 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -114,7 +114,7 @@ export type HandyNet = {
 	]=]
 	boolean: boolean,
 	--[=[
-		배열 자료형
+        array data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -133,7 +133,7 @@ export type HandyNet = {
 	]=]
 	array: <T>(value: T) -> { [number]: T },
 	--[=[
-		선택형 자료형
+        optional data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -149,7 +149,7 @@ export type HandyNet = {
 	]=]
 	optional: <T>(value: T) -> T?,
 	--[=[
-		로블록스 인스턴스 자료형
+        roblox instance data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -164,7 +164,7 @@ export type HandyNet = {
 	]=]
 	Instance: Instance,
 	--[=[
-		비어있는 자료형
+        empty data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -179,7 +179,7 @@ export type HandyNet = {
 	]=]
 	nothing: nil,
 	--[=[
-		알 수 없는 자료형
+        unknown data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -196,7 +196,7 @@ export type HandyNet = {
 	]=]
 	unknown: unknown,
 	--[=[
-		부호 없는 8비트 정수 자료형 (1 바이트)
+        Unsigned 8-bit integer data type (1 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -212,7 +212,7 @@ export type HandyNet = {
 	]=]
 	u8: number,
 	--[=[
-		부호 없는 16비트 정수 자료형 (2 바이트)
+        Unsigned 16-bit integer data type (2 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -228,8 +228,8 @@ export type HandyNet = {
 	]=]
 	u16: number,
 	--[=[
-		부호 없는 32비트 정수 자료형 (4 바이트)
-
+        Unsigned 32-bit integer data type (4 byte)
+        
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
@@ -245,6 +245,7 @@ export type HandyNet = {
 	u32: number,
 	--[=[
 		8비트 정수 자료형 (1 바이트)
+        8-bit integer data type (1 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -260,9 +261,9 @@ export type HandyNet = {
 	]=]
 	i8: number,
 	--[=[
-		16비트 정수 자료형 (2 바이트)
-
-		```luau
+        16-bit integer data type (2 byte)
+		
+        ```luau
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
 				"client->server",
@@ -276,9 +277,9 @@ export type HandyNet = {
 	]=]
 	i16: number,
 	--[=[
-		32비트 정수 자료형 (4 바이트)
-
-		```luau
+        32-bit integer data type (4 byte)
+		
+        ```luau
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
 				"client->server",
@@ -292,7 +293,7 @@ export type HandyNet = {
 	]=]
 	i32: number,
 	--[=[
-		32비트 부동 소수점 자료형 (4 바이트)
+        32-bit float point data type (4 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -308,7 +309,7 @@ export type HandyNet = {
 	]=]
 	f32: number,
 	--[=[
-		64비트 부동 소수점 자료형 (8 바이트)
+        64-bit float point data type (8 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -340,7 +341,7 @@ export type HandyNet = {
 	]=]
 	string: (size: number?) -> (string),
 	--[=[
-		구성요소가 32비트 부동소수점인 3차원 백터 자료형 (4 × 3 = 12 바이트)
+        a vector3 data type whose components are 32-bit float point (4 × 3 = 12 bytes)  
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -355,9 +356,9 @@ export type HandyNet = {
 	]=]
 	Vector3: Vector3,
 	--[=[
-		구성요소가 32비트 부동소수점인 2차원 백터 자료형 (4 × 2 = 8 바이트)
-
-		```luau
+        a vector2 data type whose components are 32-bit float point (4 × 2 = 8 bytes)  
+		
+        ```luau
 		local packets = HandyNet.defineNamespace("example", {
 			example = HandyNet.definePacket(
 				"client->server",
@@ -370,7 +371,7 @@ export type HandyNet = {
 	]=]
 	Vector2: Vector2,
 	--[=[
-		버퍼 자료형
+        buffer data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -387,16 +388,16 @@ export type HandyNet = {
 	]=]
 	buffer: (size: number?) -> (buffer),
 	--[=[
-		3차원 위치와 회전을 가지는 CFrame 자료형
+        CFrame data type having 3D position and rotation 
 
-		CFrame값이 정렬되어있거나 정렬되어있지 않을 수 있습니다.
+        CFrame values may or may not be sorted.
 
-		|CFrame 상태    | 크기 (바이트)          |
+		|CFrame state   | size (byte)          |
 		| ------------- | ---------------------- |
-		| 정렬됨        | 4 × 3 + 1 = 13         |
-		| 정렬되지 않음 | 4 × 3 + 2 × 3 + 1 = 19 |
+		| array         | 4 × 3 + 1 = 13         |
+		| not array     | 4 × 3 + 2 × 3 + 1 = 19 |
 
-		전송 시 CFrame 데이터는 쿼터니언을 통해 압축됩니다.
+        when sending CFrame data is compress with quaternions
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -412,9 +413,9 @@ export type HandyNet = {
 	]=]
 	CFrame: CFrame,
 	--[=[
-		3차원 위치와 회전을 가지는 정렬된 CFrame 자료형 (13 바이트)
+        sorted CFrame data type (13 byte) having 3D position and rotation 
 
-		CFrame값이 무조건 정렬되어 있어야합니다.
+		CFrame value must be aligned unconditionally.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -429,9 +430,9 @@ export type HandyNet = {
 	]=]
 	AlignedCFrame: CFrame,
 	--[=[
-		3차원 위치와 회전을 가지는 정렬되지 않은 CFrame 자료형 (19 바이트)
+        not sorted CFrame data type having 3D position and rotation (19 byte)
 
-		CFrame값이 정렬되어있지 않아도 됩니다.
+        CFrame value does not have to be sorted.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -446,7 +447,7 @@ export type HandyNet = {
 	]=]
 	UnalignedCFrame: CFrame,
 	--[=[
-		3차원 위치와 회전을 가지는 CFrame 자료형 (24 바이트)
+        CFrame data type having 3D position and rotation (24 byte)
 
 		CFrame값의 성분을 그대로 32비트 부동소수점으로 패킹하여 전송합니다.
 
@@ -463,7 +464,7 @@ export type HandyNet = {
 	]=]
 	RawCFrame: CFrame,
 	--[=[
-		맵 자료형
+        map data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -482,9 +483,9 @@ export type HandyNet = {
 	]=]
 	map: <K, V>(key: K, value: V) -> { [K]: V },
 	--[=[
-		로블록스 BrickColor 자료형 (2 바이트)
+        roblox BrickColor data type (2 byte)
 
-		간단한 색상 정보를 전송할 때 유용합니다.
+        useful for transmitting simple colors.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -499,7 +500,7 @@ export type HandyNet = {
 	]=]
 	BrickColor: BrickColor,
 	--[=[
-		로블록스 Enum 자료형 (4 바이트)
+        roblox enum data type (4 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
