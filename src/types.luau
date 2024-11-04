@@ -76,7 +76,7 @@ export type HandyNet = {
 	]=]
 	defineNamespace: <T>(name: string, packets: T) -> T,
 	--[=[
-        structure data type
+        struct data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
