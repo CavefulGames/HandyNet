@@ -45,7 +45,7 @@ type Event = {
 -- Library type
 export type HandyNet = {
 	--[=[
-        defines a new packet in a namespace
+        Defines a new packet in a namespace
 
 		```luau
 		HandyNet.definePacket(
@@ -58,7 +58,7 @@ export type HandyNet = {
 	definePacket: (<T>(direction: "server->client", value: T, reliability: ("reliable" | "unreliable")?) -> ServerPacket<T>)
 		& (<T>(direction: "client->server", value: T, reliability: ("reliable" | "unreliable")?) -> ClientPacket<T>),
 	--[=[
-        defines a new event in a namespace 
+        Defines a new event in a namespace 
 
 		```luau
 		HandyNet.defineEvent(reliability) -- defult reliability: "reliable"
@@ -66,7 +66,7 @@ export type HandyNet = {
 	]=]
 	defineEvent: (reliability: ("reliable" | "unreliable")?) -> (Event),
 	--[=[
-        defines a new namespace
+        Defines a new namespace
 
 		```luau
 		HandyNet.defineNamespace("namespace_name", {
@@ -76,7 +76,7 @@ export type HandyNet = {
 	]=]
 	defineNamespace: <T>(name: string, packets: T) -> T,
 	--[=[
-        struct data type
+        Struct data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -99,7 +99,7 @@ export type HandyNet = {
 	]=]
 	struct: <T>(format: T) -> T,
 	--[=[
-        boolean data type (1 byte)
+        Boolean data type (1 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -114,7 +114,7 @@ export type HandyNet = {
 	]=]
 	boolean: boolean,
 	--[=[
-        array data type
+        Array data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -133,7 +133,7 @@ export type HandyNet = {
 	]=]
 	array: <T>(value: T) -> { [number]: T },
 	--[=[
-        optional data type
+        Optional data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -149,7 +149,7 @@ export type HandyNet = {
 	]=]
 	optional: <T>(value: T) -> T?,
 	--[=[
-        roblox instance data type
+        Roblox instance data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -164,7 +164,7 @@ export type HandyNet = {
 	]=]
 	Instance: Instance,
 	--[=[
-        empty data type
+        Empty data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -179,7 +179,7 @@ export type HandyNet = {
 	]=]
 	nothing: nil,
 	--[=[
-        unknown data type
+        Unknown data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -324,7 +324,7 @@ export type HandyNet = {
 	]=]
 	f64: number,
 	--[=[
-		string data type
+		String data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -340,7 +340,7 @@ export type HandyNet = {
 	]=]
 	string: (size: number?) -> (string),
 	--[=[
-        a vector3 data type whose components are 32-bit float point (4 × 3 = 12 bytes)  
+        A vector3 data type whose components are 32-bit float point (4 × 3 = 12 bytes)  
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -355,7 +355,7 @@ export type HandyNet = {
 	]=]
 	Vector3: Vector3,
 	--[=[
-        a vector2 data type whose components are 32-bit float point (4 × 2 = 8 bytes)  
+        A vector2 data type whose components are 32-bit float point (4 × 2 = 8 bytes)  
 		
         ```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -370,7 +370,7 @@ export type HandyNet = {
 	]=]
 	Vector2: Vector2,
 	--[=[
-        buffer data type
+        Buffer data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -413,7 +413,7 @@ export type HandyNet = {
 	]=]
 	CFrame: CFrame,
 	--[=[
-        sorted CFrame data type (13 byte) having 3D position and rotation 
+        Sorted CFrame data type (13 byte) having 3D position and rotation 
 
 		CFrame value must be aligned unconditionally.
 
@@ -430,7 +430,7 @@ export type HandyNet = {
 	]=]
 	AlignedCFrame: CFrame,
 	--[=[
-        not sorted CFrame data type having 3D position and rotation (19 byte)
+        Not sorted CFrame data type having 3D position and rotation (19 byte)
 
         CFrame value does not have to be sorted.
 
@@ -449,7 +449,7 @@ export type HandyNet = {
 	--[=[
         CFrame data type having 3D position and rotation (24 byte)
 
-        the components of the CFrame value are transmitted as 32-bit floating point numbers.
+        The components of the CFrame value are transmitted as 32-bit floating point numbers.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -464,7 +464,7 @@ export type HandyNet = {
 	]=]
 	RawCFrame: CFrame,
 	--[=[
-        map data type
+        Map data type
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -483,9 +483,9 @@ export type HandyNet = {
 	]=]
 	map: <K, V>(key: K, value: V) -> { [K]: V },
 	--[=[
-        roblox BrickColor data type (2 byte)
+        Roblox BrickColor data type (2 byte)
 
-        useful for transmitting simple colors.
+        Useful for transmitting simple colors.
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
@@ -500,7 +500,7 @@ export type HandyNet = {
 	]=]
 	BrickColor: BrickColor,
 	--[=[
-        roblox enum data type (4 byte)
+        Roblox enum data type (4 byte)
 
 		```luau
 		local packets = HandyNet.defineNamespace("example", {
