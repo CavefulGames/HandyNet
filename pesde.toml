@@ -5,11 +5,11 @@ description = "ByteNet fork made more handy"
 authors = ["ffrostfall", "jiwonz"]
 repository = "https://github.com/CavefulGames/HandyNet"
 license = "MIT"
-includes = ["lib.luau", "src", "README.md", "LICENSE.md", "pesde.toml"]
+includes = ["src", "README.md", "LICENSE.md", "pesde.toml"]
 
 [target]
 environment = "roblox"
-lib = "lib.luau"
+lib = "src/init.luau"
 build_files = ["src"]
 
 [scripts]
