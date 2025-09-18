@@ -1,23 +1,30 @@
-#:schema https://raw.githubusercontent.com/jiwonz/pesde-schema/refs/heads/0.5/schema/generated/pesde.json
 name = "caveful_games/handynet"
 version = "0.3.0"
 description = "ByteNet fork made more handy"
 authors = ["ffrostfall", "jiwonz"]
 repository = "https://github.com/CavefulGames/HandyNet"
 license = "MIT"
-includes = ["src", "README.md", "LICENSE.md", "pesde.toml"]
+includes = ["src/**", "README.md", "LICENSE.md", "pesde.toml"]
+workspace_members = ["workspace/*"]
 
 [target]
 environment = "roblox"
-lib = "src/init.luau"
+lib = "src/lib.luau"
 build_files = ["src"]
 
 [scripts]
-roblox_sync_config_generator = ".pesde/roblox_sync_config_generator.luau"
-sourcemap_generator = ".pesde/sourcemap_generator.luau"
+roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
 
 [indices]
-default = "https://github.com/daimond113/pesde-index"
+default = "https://github.com/pesde-pkg/index"
+
+[engines]
+pesde = "^0.7.1"
+lune = "^0.9.0"
 
 [dependencies]
-limesignal = { name = "caveful_games/limesignal", version = "^0.1.10" }
+signal = { name = "jiwonz/signal", version = "^0.1.0" }
+
+[dev_dependencies]
+scripts = { name = "jiwonz/pesde_scripts_rojo", version = "^0.1.0-rc.1", target = "lune" }

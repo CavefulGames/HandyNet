@@ -1,0 +1,22 @@
+[settings]
+experimental = true
+
+[tools]
+"github:JohnnyMorganz/StyLua" = "latest"
+"github:JohnnyMorganz/luau-lsp" = "latest"
+"github:Kampfkarren/selene" = "latest"
+"github:luau-lang/luau" = "latest"
+"github:rojo-rbx/rojo" = "latest"
+node = "latest"
+
+[tasks.sourcemap]
+description = "Generate rojo sourcemap"
+run = [
+	"rojo sourcemap workspace/handynet/default.project.json -o sourcemap.json",
+]
+
+[tasks.example]
+description = "Build and Open example in Roblox Studio"
+run = [
+	"rojo build example/default.project.json -o build/example.rbxl"
+]

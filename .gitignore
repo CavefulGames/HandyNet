@@ -2,3 +2,6 @@ roblox_packages
 /*.lock
 build
 sourcemap.json
+.pesde
+lune_packages
+luau_packages

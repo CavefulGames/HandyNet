@@ -1,0 +1,30 @@
+{
+	"name": "handynet-example",
+	"tree": {
+		"$className": "DataModel",
+
+		"ReplicatedStorage": {
+			"roblox_packages": {
+				"$path": "roblox_packages"
+			},
+			"HandyNet": {
+				"$path": "src"
+			},
+			"shared": {
+				"$path": "dev/shared"
+			}
+		},
+
+		"ServerScriptService": {
+			"server": {
+				"$path": "dev/server"
+			}
+		},
+
+		"StarterPlayer": {
+			"StarterPlayerScripts": {
+				"$path": "dev/client"
+			}
+		}
+	}
+}
