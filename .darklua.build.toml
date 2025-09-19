@@ -1,0 +1,20 @@
+input = "src"
+output = "darklua_build"
+
+[options]
+include = [
+	".darklua.json5",
+	"dev.project.json",
+	".luaurc",
+]
+
+silent = false
+watch = false
+
+temp_dir_keep = false
+temp_dir_location = "."
+
+[options.scripts]
+preProcess = [
+	"rojo sourcemap dev.project.json -o sourcemap.json",
+]

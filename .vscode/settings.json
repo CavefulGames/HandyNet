@@ -1,4 +1,5 @@
 {
 	"luau-lsp.sourcemap.rojoProjectFile": "dev.project.json",
-	"luau-lsp.completion.imports.requireStyle": "alwaysRelative"
+	"luau-lsp.completion.imports.requireStyle": "alwaysRelative",
+	"stylua.targetReleaseVersion": "latest"
 }
