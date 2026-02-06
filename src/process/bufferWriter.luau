@@ -95,7 +95,7 @@ end
 
 function bufferWriter.writei16(value: number)
 	alloc(2)
-	buffer.writeu16(buff, cursor, value)
+	buffer.writei16(buff, cursor, value)
 	cursor += 2
 end
 
